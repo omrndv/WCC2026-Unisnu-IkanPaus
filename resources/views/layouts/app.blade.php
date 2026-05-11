@@ -124,6 +124,17 @@
             }
         });
     </script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil Keluar',
+            text: "{{ session('success') }}",
+            confirmButtonColor: '#5C2E00',
+        });
+    </script>
+    @endif
     @stack('scripts')
 </body>
 

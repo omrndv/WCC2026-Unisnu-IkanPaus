@@ -368,28 +368,30 @@
     });
 
     gsap.from(".quiz-elem", {
-    scrollTrigger: {
-        trigger: ".quiz-elem", 
-        start: "top 90%",      
-        toggleActions: "play none none none"
-    },
-    y: 50,
-    opacity: 0,
-    duration: 1.2,
-    stagger: 0.3,
-    ease: "power3.out"
-});
+        scrollTrigger: {
+            trigger: ".quiz-elem",
+            start: "top 90%",
+            toggleActions: "play none none none"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power3.out"
+    });
 
     gsap.from(".product-card", {
         scrollTrigger: {
-            trigger: "#produk",
-            start: "top 70%"
+            trigger: "#produk", // Trigger pakai ID sectionnya
+            start: "top 85%", // Muncul pas section produk baru masuk 15% ke layar
+            toggleActions: "play none none none"
         },
-        y: 100,
+        y: 50, // Jarak dorong dikurangin dikit biar gak terlalu jauh (lebih smooth)
         opacity: 0,
         duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
+        stagger: 0.2, // Kartu muncul gantian (kerasa premium)
+        ease: "power3.out",
+        clearProps: "all" // PENTING: Menghapus style opacity 0 setelah kelar animasi
     });
 </script>
 @endpush

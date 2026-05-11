@@ -1,33 +1,46 @@
 <div class="fixed top-6 left-0 w-full flex justify-center z-50 px-4">
     <nav class="glass-nav border border-white/50 rounded-full px-2 py-2 flex items-center justify-between transition-all duration-500 w-full max-w-7xl" id="navbar">
+
         <div class="bg-primary text-white pl-6 pr-8 py-2.5 rounded-full flex items-center shadow-md shrink-0">
             <span class="text-xl font-title font-bold italic tracking-wider">Getuk Asri</span>
         </div>
 
         <div class="hidden lg:flex items-center gap-1 px-4 font-semibold text-primary text-[10px] uppercase tracking-[0.2em]">
-            <a href="{{ route('home') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Beranda --}}
+            <a href="{{ route('home') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('home') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Beranda
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('home') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
-            <a href="{{ route('produk') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Produk --}}
+            <a href="{{ route('produk') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('produk') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Produk
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('produk') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
-            <a href="{{ route('tentang') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Tentang --}}
+            <a href="{{ route('tentang') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('tentang') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Tentang
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('tentang') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
-            <a href="{{ route('blog') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Blog --}}
+            <a href="{{ route('blog') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('blog') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Blog
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('blog') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
-            <a href="{{ route('pesan') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Pesan --}}
+            <a href="{{ route('pesan') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('pesan') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Pesan
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('pesan') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
-            <a href="{{ route('kontak') }}" class="px-3 py-2 hover:text-highlight transition-all duration-300 relative group">
+
+            {{-- Kontak --}}
+            <a href="{{ route('kontak') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('kontak') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Kontak
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-1/2"></span>
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('kontak') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
         </div>
 
