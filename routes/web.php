@@ -25,3 +25,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/clear-cache', [WebsiteController::class, 'clearCache'])->name('admin.clear-cache');
     Route::get('/logs', [WebsiteController::class, 'adminLogs'])->name('admin.logs');
 });
+

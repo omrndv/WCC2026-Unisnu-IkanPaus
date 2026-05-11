@@ -21,6 +21,10 @@ class WebsiteController extends Controller
         });
     }
 
+    public function produkdetail() {
+        return view('produkdetail');
+    }
+    
     public function tentang()
     {
         return Cache::remember('tentang_page', 3600, function () {
