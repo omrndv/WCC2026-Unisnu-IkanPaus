@@ -60,6 +60,14 @@
                 transform: translateX(0);
             }
         }
+
+        @media (min-width: 1024px) {
+            .sidebar-desktop-fix {
+                transform: translateX(0) !important;
+                position: sticky !important;
+                top: 0;
+            }
+        }
     </style>
 </head>
 
@@ -75,7 +83,7 @@
     </div>
 
     <div class="flex min-h-screen relative">
-        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 bg-primary text-white p-8 z-[110] transition-transform duration-300 sidebar-hidden lg:sidebar-open shrink-0 shadow-2xl flex flex-col h-screen">
+        <aside id="sidebar" class="fixed lg:sticky inset-y-0 left-0 w-72 bg-primary text-white p-8 z-[110] transition-transform duration-300 sidebar-hidden sidebar-desktop-fix shrink-0 shadow-2xl flex flex-col h-screen">
             <div class="absolute inset-0 bg-batik-pattern opacity-20 pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col h-full">
@@ -129,26 +137,28 @@
             </div>
         </aside>
 
-        <main class="flex-1 p-6 md:p-12 mt-20 lg:mt-0 overflow-y-auto w-full min-w-0">
-            <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-16 border-b border-gray-100 pb-8 gap-6 relative z-10">
-                <div>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-highlight mb-2 block">Sistem Manajemen</span>
-                    <h1 class="text-3xl md:text-4xl font-title font-bold text-primary italic">@yield('title')</h1>
-                </div>
-
-                <div class="flex items-center gap-4 bg-white p-4 md:p-0 rounded-3xl md:bg-transparent shadow-sm md:shadow-none w-full md:w-auto relative">
-                    <div class="text-right flex-1 md:flex-none">
-                        <p class="text-sm font-bold text-primary" id="greeting">Nadiv Muhammad</p>
-                        <p class="text-[9px] md:text-[10px] font-medium text-gray-400 uppercase tracking-widest" id="liveClock">00:00:00 WIB</p>
+        <main class="flex-1 min-w-0">
+            <div class="p-6 md:p-12 mt-20 lg:mt-0">
+                <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-16 border-b border-gray-100 pb-8 gap-6 relative z-10">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-highlight mb-2 block">Sistem Manajemen</span>
+                        <h1 class="text-3xl md:text-4xl font-title font-bold text-primary italic">@yield('title')</h1>
                     </div>
-                    <div class="w-10 h-10 md:w-12 md:h-12 bg-bgLight rounded-full border-2 border-highlight/20 flex items-center justify-center font-title italic font-bold text-primary shadow-sm shrink-0">
-                        N
-                    </div>
-                </div>
-            </header>
 
-            <div class="animate-fade-in relative z-0">
-                @yield('content')
+                    <div class="flex items-center gap-4 bg-white p-4 md:p-0 rounded-3xl md:bg-transparent shadow-sm md:shadow-none w-full md:w-auto relative">
+                        <div class="text-right flex-1 md:flex-none">
+                            <p class="text-sm font-bold text-primary" id="greeting">Nadiv Muhammad</p>
+                            <p class="text-[9px] md:text-[10px] font-medium text-gray-400 uppercase tracking-widest" id="liveClock">00:00:00 WIB</p>
+                        </div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-bgLight rounded-full border-2 border-highlight/20 flex items-center justify-center font-title italic font-bold text-primary shadow-sm shrink-0">
+                            N
+                        </div>
+                    </div>
+                </header>
+
+                <div class="animate-fade-in relative z-0">
+                    @yield('content')
+                </div>
             </div>
         </main>
 
@@ -158,7 +168,6 @@
     @stack('scripts')
 
     <script>
-        // TOGGLE SIDEBAR MOBILE (Fixed)
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -167,7 +176,6 @@
             overlay.classList.toggle('hidden');
         }
 
-        // 1. LIVE CLOCK & GREETING
         function updateClock() {
             const now = new Date();
             const hours = now.getHours();
@@ -185,7 +193,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 2. SWEETALERT CONFIGS
         function confirmClearCache(e) {
             e.preventDefault();
             Swal.fire({
