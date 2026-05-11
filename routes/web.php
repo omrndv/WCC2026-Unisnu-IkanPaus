@@ -15,8 +15,12 @@ Route::post('/kontak/kirim', [WebsiteController::class, 'storeContact'])->name('
 Route::get('/order', [WebsiteController::class, 'order'])->name('order');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/login', [WebsiteController::class, 'showLoginForm'])->name('admin.login');
 
 Route::prefix('admin')->group(function () {
+    Route::post('/login', [WebsiteController::class, 'login'])->name('admin.login.submit');
+    Route::post('/logout', [WebsiteController::class, 'logout'])->name('admin.logout');
+
     Route::get('/', [WebsiteController::class, 'admin'])->name('admin.dashboard');
     Route::get('/produk', [WebsiteController::class, 'adminProduk'])->name('admin.produk');
     Route::get('/blog', [WebsiteController::class, 'adminBlog'])->name('admin.blog');
@@ -25,4 +29,3 @@ Route::prefix('admin')->group(function () {
     Route::get('/clear-cache', [WebsiteController::class, 'clearCache'])->name('admin.clear-cache');
     Route::get('/logs', [WebsiteController::class, 'adminLogs'])->name('admin.logs');
 });
-
