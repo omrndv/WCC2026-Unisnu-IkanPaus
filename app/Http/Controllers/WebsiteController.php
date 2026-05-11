@@ -14,6 +14,10 @@ class WebsiteController extends Controller
         return view('produk');
     }
 
+    public function produkdetail() {
+        return view('produkdetail');
+    }
+
     public function tentang() {
         return view('tentang');
     }
