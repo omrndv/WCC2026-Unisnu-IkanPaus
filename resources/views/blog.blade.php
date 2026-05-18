@@ -17,26 +17,26 @@
 <section class="py-10 bg-white border-b border-gray-100 sticky top-20 z-30 shadow-sm">
     <div class="container mx-auto px-6 flex justify-center gap-4 md:gap-8 overflow-x-auto hide-scrollbar text-sm font-medium">
         @php
-            $currentCat = request('category');
+        $currentCat = request('category');
         @endphp
-        
-        <a href="{{ route('blog') }}" 
-           class="pb-2 whitespace-nowrap transition-all duration-300 {{ !$currentCat ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
+
+        <a href="{{ route('blog') }}"
+            class="pb-2 whitespace-nowrap transition-all duration-300 {{ !$currentCat ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
             Semua Cerita
         </a>
-        
-        <a href="{{ route('blog', ['category' => 'sejarah']) }}" 
-           class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'sejarah' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
+
+        <a href="{{ route('blog', ['category' => 'sejarah']) }}"
+            class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'sejarah' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
             Sejarah Kuliner
         </a>
-        
-        <a href="{{ route('blog', ['category' => 'budaya']) }}" 
-           class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'budaya' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
+
+        <a href="{{ route('blog', ['category' => 'budaya']) }}"
+            class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'budaya' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
             Budaya Banyumas
         </a>
-        
-        <a href="{{ route('blog', ['category' => 'tips']) }}" 
-           class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'tips' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
+
+        <a href="{{ route('blog', ['category' => 'tips']) }}"
+            class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'tips' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
             Tips & Resep
         </a>
     </div>
@@ -45,82 +45,92 @@
 <section class="py-20 bg-[#FAFAFA]">
     <div class="container mx-auto px-6">
         @if($currentCat)
-            <div class="mb-10 text-gray-500 text-sm italic">
-                Menampilkan cerita dalam kategori: <span class="text-primary font-bold capitalize">{{ $currentCat }}</span>
-            </div>
+        <div class="mb-10 text-gray-500 text-sm italic">
+            Menampilkan cerita dalam kategori: <span class="text-primary font-bold capitalize">{{ $currentCat }}</span>
+        </div>
         @endif
 
         <div class="grid md:grid-cols-3 gap-12">
+            @forelse($blogs as $blog)
             <article class="group blog-card">
                 <div class="rounded-[2rem] overflow-hidden mb-6 relative shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1590074251910-3f40f0a59591?auto=format&fit=crop&q=80&w=800" alt="Batik Banyumasan" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Budaya</div>
+                    @if($blog->gambar)
+                    <img src="{{ asset('storage/' . $blog->gambar) }}" alt="{{ $blog->judul }}"
+                        class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110">
+                    @else
+                    <div class="w-full h-72 bg-bgLight/40 flex items-center justify-center text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    @endif
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                        {{ $blog->kategori }}
+                    </div>
                 </div>
                 <div class="px-2">
                     <div class="flex items-center gap-4 text-xs text-gray-400 mb-3">
-                        <span>12 Mei 2026</span>
+                        <span>{{ $blog->created_at->translatedFormat('d F Y') }}</span>
                         <span class="w-1 h-1 bg-highlight rounded-full"></span>
-                        <span>5 Menit Baca</span>
+                        <span>{{ ceil(str_word_count(strip_tags($blog->konten)) / 200) }} Menit Baca</span>
                     </div>
-                    <h3 class="text-2xl font-title text-primary mb-4 group-hover:text-highlight transition duration-300">Filosofi Motif Batik Banyumasan dalam Kemasan Getuk</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">Mengenal lebih dekat sejarah panjang motif batik yang menjadi identitas visual dari Getuk Goreng Asri sejak puluhan tahun lalu...</p>
+                    <h3 class="text-2xl font-title text-primary mb-4 group-hover:text-highlight transition duration-300">
+                        {{ $blog->judul }}
+                    </h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+                        {{ Str::limit(strip_tags($blog->konten), 150) }}
+                    </p>
                     <a href="#" class="text-primary font-bold text-sm border-b border-primary pb-1 hover:text-highlight hover:border-highlight transition inline-flex items-center gap-2">
                         Baca Selengkapnya
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                     </a>
                 </div>
             </article>
-
-            <article class="group blog-card">
-                <div class="rounded-[2rem] overflow-hidden mb-6 relative shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1556910110-ad5bb7440475?auto=format&fit=crop&q=80&w=800" alt="Sejarah Getuk" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Sejarah</div>
-                </div>
-                <div class="px-2">
-                    <div class="flex items-center gap-4 text-xs text-gray-400 mb-3">
-                        <span>08 Mei 2026</span>
-                        <span class="w-1 h-1 bg-highlight rounded-full"></span>
-                        <span>8 Menit Baca</span>
-                    </div>
-                    <h3 class="text-2xl font-title text-primary mb-4 group-hover:text-highlight transition duration-300">Evolusi Getuk Goreng: Dari Dapur Mbah Asri ke Era Digital</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">Perjalanan rasa getuk goreng yang tetap konsisten meski telah melewati berbagai generasi kepemimpinan dan perubahan zaman...</p>
-                    <a href="#" class="text-primary font-bold text-sm border-b border-primary pb-1 hover:text-highlight hover:border-highlight transition inline-flex items-center gap-2">
-                        Baca Selengkapnya
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                    </a>
-                </div>
-            </article>
-
-            <article class="group blog-card">
-                <div class="rounded-[2rem] overflow-hidden mb-6 relative shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1547516508-4c1f9c7c4ec3?auto=format&fit=crop&q=80&w=800" alt="Singkong Pilihan" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Kualitas</div>
-                </div>
-                <div class="px-2">
-                    <div class="flex items-center gap-4 text-xs text-gray-400 mb-3">
-                        <span>01 Mei 2026</span>
-                        <span class="w-1 h-1 bg-highlight rounded-full"></span>
-                        <span>4 Menit Baca</span>
-                    </div>
-                    <h3 class="text-2xl font-title text-primary mb-4 group-hover:text-highlight transition duration-300">Seni Memilih Singkong: Rahasia Tekstur Getuk yang Lembut</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">Mengapa tidak semua singkong bisa jadi getuk goreng berkualitas? Intip proses seleksi bahan baku di dapur Getuk Asri...</p>
-                    <a href="#" class="text-primary font-bold text-sm border-b border-primary pb-1 hover:text-highlight hover:border-highlight transition inline-flex items-center gap-2">
-                        Baca Selengkapnya
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                    </a>
-                </div>
-            </article>
+            @empty
+            <div class="col-span-3 text-center py-20 text-gray-400 italic font-medium">
+                Belum ada cerita yang diterbitkan.
+            </div>
+            @endforelse
         </div>
 
+        {{-- Pagination --}}
+        @if($blogs->hasPages())
         <div class="mt-20 flex justify-center items-center gap-4">
-            <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            @if($blogs->onFirstPage())
+            <button disabled class="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
             </button>
-            <span class="text-sm font-bold text-primary">Halaman 1 dari 10</span>
-            <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            @else
+            <a href="{{ $blogs->previousPageUrl() }}" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            @endif
+
+            <span class="text-sm font-bold text-primary">
+                Halaman {{ $blogs->currentPage() }} dari {{ $blogs->lastPage() }}
+            </span>
+
+            @if($blogs->hasMorePages())
+            <a href="{{ $blogs->nextPageUrl() }}" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+            @else
+            <button disabled class="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
             </button>
+            @endif
         </div>
+        @endif
     </div>
 </section>
 

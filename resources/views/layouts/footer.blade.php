@@ -5,7 +5,7 @@
             <div class="md:col-span-1">
                 <h3 class="text-3xl font-title font-bold italic text-white mb-6">Getuk Goreng Asri</h3>
                 <p class="text-sm font-light opacity-80 leading-relaxed mb-6">
-                    Menghidupkan cita rasa tradisional Banyumas di era modern. Resep warisan tanpa pengawet buatan sejak 1940.
+                    Menghidupkan cita rasa tradisional Banyumas di era modern. Resep warisan tanpa pengawet buatan sejak 1990.
                 </p>
                 <div class="flex gap-4">
                     <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-highlight hover:text-white transition duration-300">

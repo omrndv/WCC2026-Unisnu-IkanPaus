@@ -18,7 +18,7 @@
     <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row gap-16">
 
-            <div class="lg:w-1/3 space-y-8 relative z-10"> {{-- Tambah z-10 --}}
+            <div class="lg:w-1/3 space-y-8 relative z-10">
                 {{-- Card Lokasi --}}
                 <div class="contact-info bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
                     <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-highlight mb-6 shadow-lg shadow-primary/20">
@@ -39,7 +39,10 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-title font-bold text-primary mb-2">Email & WhatsApp</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">halo@getukasri.com<br>+62 816-681-308</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        {{ $email_bisnis }}<br>
+                        +62 {{ $wa_number }}
+                    </p>
                 </div>
 
                 {{-- Card Jam Operasional --}}
@@ -51,35 +54,81 @@
                     </div>
                     <h3 class="text-xl font-title font-bold text-primary mb-2">Jam Operasional</h3>
                     <p class="text-gray-500 text-sm leading-relaxed font-semibold">Setiap Hari</p>
-                    <p class="text-gray-400 text-sm">07.45 – 19.30 WIB</p>
+                    <p class="text-gray-400 text-sm">{{ $jam_buka }} – {{ $jam_tutup }} WIB</p>
                 </div>
             </div>
 
+            {{-- Form --}}
             <div class="lg:w-2/3 bg-[#FAFAFA] p-10 md:p-16 rounded-[3rem] border border-gray-100 shadow-sm slide-up-form">
-                <form action="#" class="space-y-8">
+
+                {{-- Flash Success --}}
+                @if(session('success'))
+                <div class="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-2xl text-sm font-medium mb-8 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                <form action="{{ route('kontak.store') }}" method="POST" class="space-y-8">
+                    @csrf
+
                     <div class="grid md:grid-cols-2 gap-8">
+                        {{-- Nama --}}
                         <div class="space-y-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Nama Lengkap</label>
-                            <input type="text" class="w-full px-8 py-4 rounded-full bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all" placeholder="Nadiv...">
+                            <input
+                                type="text"
+                                name="nama"
+                                value="{{ old('nama') }}"
+                                class="w-full px-8 py-4 rounded-full bg-white border @error('nama') border-red-400 @else border-gray-200 @enderror focus:ring-2 focus:ring-highlight outline-none transition-all"
+                                placeholder="Nama kamu...">
+                            @error('nama')
+                            <p class="text-red-400 text-xs ml-4 mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
+
+                        {{-- Email --}}
                         <div class="space-y-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Alamat Email</label>
-                            <input type="email" class="w-full px-8 py-4 rounded-full bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all" placeholder="nadiv@email.com">
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                class="w-full px-8 py-4 rounded-full bg-white border @error('email') border-red-400 @else border-gray-200 @enderror focus:ring-2 focus:ring-highlight outline-none transition-all"
+                                placeholder="kamu@email.com">
+                            @error('email')
+                            <p class="text-red-400 text-xs ml-4 mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
+
+                    {{-- Subjek --}}
                     <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Subjek Pesan</label>
-                        <select class="w-full px-8 py-4 rounded-full bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all appearance-none">
-                            <option>Pertanyaan Produk</option>
-                            <option>Kerjasama Reseller</option>
-                            <option>Kritik & Saran</option>
+                        <select name="subjek" class="w-full px-8 py-4 rounded-full bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all appearance-none">
+                            <option value="Pertanyaan Produk" {{ old('subjek') == 'Pertanyaan Produk'    ? 'selected' : '' }}>Pertanyaan Produk</option>
+                            <option value="Kerjasama Reseller" {{ old('subjek') == 'Kerjasama Reseller'   ? 'selected' : '' }}>Kerjasama Reseller</option>
+                            <option value="Kritik & Saran" {{ old('subjek') == 'Kritik & Saran'       ? 'selected' : '' }}>Kritik & Saran</option>
                         </select>
                     </div>
+
+                    {{-- Pesan --}}
                     <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Pesan Anda</label>
-                        <textarea rows="5" class="w-full px-8 py-6 rounded-[2rem] bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all resize-none" placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                        <textarea
+                            name="pesan"
+                            rows="5"
+                            class="w-full px-8 py-6 rounded-[2rem] bg-white border @error('pesan') border-red-400 @else border-gray-200 @enderror focus:ring-2 focus:ring-highlight outline-none transition-all resize-none"
+                            placeholder="Tuliskan pesan Anda di sini...">{{ old('pesan') }}</textarea>
+                        @error('pesan')
+                        <p class="text-red-400 text-xs ml-4 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                    <button class="w-full bg-primary text-white py-5 rounded-full font-bold text-lg hover:bg-secondary transition duration-300 shadow-xl flex items-center justify-center gap-3 group">
+
+                    {{-- Submit --}}
+                    <button type="submit" class="w-full bg-primary text-white py-5 rounded-full font-bold text-lg hover:bg-secondary transition duration-300 shadow-xl flex items-center justify-center gap-3 group">
                         Kirim Pesan
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-2 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -95,7 +144,7 @@
     <div class="container mx-auto px-6">
         <div class="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white h-[500px] relative group">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.1235478426!2d109.28784841477544!3d-7.457465494620027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655b8c9119d495%3A0x7fc9fd33f528a555!2sGetuk%20Goreng%20ASRI!5e0!3m2!1sid!2sid!4v1715083000000!5m2!1sid!2sid"
+                src="{{ $maps_url }}"
                 class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
                 style="border:0;"
                 allowfullscreen=""
@@ -123,7 +172,7 @@
     gsap.from(".contact-info", {
         scrollTrigger: {
             trigger: ".contact-info",
-            start: "top 95%", // Dibikin muncul lebih cepet biar ga ngebug kelamaan transparan
+            start: "top 95%",
             toggleActions: "play none none none"
         },
         x: -30,
@@ -131,7 +180,7 @@
         duration: 0.8,
         stagger: 0.2,
         ease: "power2.out",
-        clearProps: "all" // PENTING: Menghapus style GSAP (opacity 0) setelah animasi selesai
+        clearProps: "all"
     });
 
     gsap.from(".slide-up-form", {

@@ -110,19 +110,22 @@
                     </a>
 
                     <div class="pt-6 mt-6 border-t border-white/5 space-y-2">
-                        <a href="{{ route('admin.clear-cache') }}" onclick="confirmClearCache(event)" class="flex items-center justify-between px-6 py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300 group">
-                            <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Clear Cache</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                        </a>
+                        <form action="{{ route('admin.clear-cache') }}" method="POST" id="formClearCache">
+                            @csrf
+                            <button type="button" onclick="confirmClearCache()" class="w-full flex items-center justify-between px-6 py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300 group">
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Clear Cache</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                            </button>
+                        </form>
                         <button onclick="Swal.fire({title: 'Optimasi...', text: 'Database sedang dioptimalkan', icon: 'success', timer: 1500, showConfirmButton: false, background: '#F5E6D3', color: '#5C2E00'})" class="w-full flex items-center justify-between px-6 py-3 rounded-xl border border-accent/30 text-accent hover:bg-accent hover:text-white transition-all duration-300 group text-left">
                             <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Optimize DB</span>
                         </button>
                     </div>
 
                     <div class="pt-4 pb-8 space-y-2">
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="hidden">@csrf</form>
                         <a href="#" onclick="event.preventDefault(); confirmLogout(event);" class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 text-red-400 hover:bg-red-500 hover:text-white group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -193,23 +196,23 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        function confirmClearCache(e) {
-            e.preventDefault();
+        function confirmClearCache() {
             Swal.fire({
                 title: 'Bersihkan Cache?',
+                text: 'Halaman akan dimuat ulang setelah cache dibersihkan.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#5C2E00',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Ya, Bersihkan!',
+                cancelButtonText: 'Batal',
                 background: '#F5E6D3',
                 color: '#5C2E00',
-                borderRadius: '2rem'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = e.currentTarget.href;
+                    document.getElementById('formClearCache').submit();
                 }
-            })
+            });
         }
 
         function confirmLogout(e) {

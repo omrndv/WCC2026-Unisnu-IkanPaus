@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+
+class Setting extends Model
+{
+    protected $fillable = ['key', 'value'];
+
+    // Ambil setting by key, dengan cache biar cepet
+    public static function get(string $key, $default = null)
+    {
+        return Cache::rememberForever("setting_{$key}", function () use ($key, $default) {
+            $setting = static::where('key', $key)->first();
+            return $setting ? $setting->value : $default;
+        });
+    }
+
+    // Simpan setting + hapus cache lama
+    public static function set(string $key, $value)
+    {
+        static::updateOrCreate(['key' => $key], ['value' => $value]);
+        Cache::forget("setting_{$key}");
+    }
+}
