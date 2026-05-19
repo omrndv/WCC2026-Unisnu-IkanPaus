@@ -96,7 +96,7 @@
             <div class="relative z-10 w-full md:w-1/3 flex justify-center">
                 <div class="relative w-48 h-48 md:w-56 md:h-56">
                     <div class="absolute inset-0 bg-highlight rounded-full animate-pulse opacity-20 blur-xl"></div>
-                    <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Promo" class="relative z-10 w-full h-full object-cover rounded-full border-4 border-white/20 shadow-2xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                    <img src="{{ asset('images/produk/fotogetuk.jpeg') }}" alt="Promo" class="relative z-10 w-full h-full object-cover rounded-full border-4 border-white/20 shadow-2xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
                 </div>
             </div>
         </div>
