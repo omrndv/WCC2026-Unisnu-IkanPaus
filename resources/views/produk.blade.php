@@ -328,7 +328,7 @@
                 <div class="relative">
                     <input type="radio" name="packaging" id="pack-besek" value="Besek (Klasik)" class="peer sr-only" checked onchange="updateCartUI()">
                     <label for="pack-besek" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
-                        <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Besek Biasa" class="w-full h-16 object-cover rounded-lg mb-2">
+                        <img src="{{ asset('images/produk/besekbiasa.jpeg') }}" alt="Besek Biasa" class="w-full h-16 object-cover rounded-lg mb-2">
                         <div class="font-bold text-xs text-primary leading-tight">Biasa / Besek</div>
                         <div class="text-[10px] text-gray-500 mt-1">Gratis</div>
                     </label>
@@ -337,7 +337,7 @@
                 <div class="relative">
                     <input type="radio" name="packaging" id="pack-hampers" value="Hampers (Premium)" class="peer sr-only" onchange="updateCartUI()">
                     <label for="pack-hampers" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
-                        <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Hampers" class="w-full h-16 object-cover rounded-lg mb-2">
+                        <img src="{{ asset('images/produk/besekbesar.jpeg') }}" alt="Hampers" class="w-full h-16 object-cover rounded-lg mb-2">
                         <div class="font-bold text-xs text-primary leading-tight">Besek Besar</div>
                         <div class="text-[10px] text-highlight font-medium mt-1">+Rp 5rb</div>
                     </label>
@@ -346,9 +346,9 @@
                 <div class="relative">
                     <input type="radio" name="packaging" id="pack-parcel" value="Parcel (Spesial)" class="peer sr-only" onchange="updateCartUI()">
                     <label for="pack-parcel" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
-                        <img src="{{ asset('images/produk/getukgoreng.jpeg ') }}" alt="Parcel" class="w-full h-16 object-cover rounded-lg mb-2">
-                        <div class="font-bold text-xs text-primary leading-tight">Parcel</div>
-                        <div class="text-[10px] text-highlight font-medium mt-1">+Rp 25rb</div>
+                        <img src="{{ asset('images/produk/kardus.jpeg ') }}" alt="Parcel" class="w-full h-16 object-cover rounded-lg mb-2">
+                        <div class="font-bold text-xs text-primary leading-tight">Kardus</div>
+                        <div class="text-[10px] text-highlight font-medium mt-1">+Rp 7rb</div>
                     </label>
                 </div>
 
@@ -555,8 +555,8 @@ let cartArray = [];
         });
 
         let packFee = 0;
-        if (packaging.includes("Hampers")) packFee = 15000;
-        else if (packaging.includes("Parcel")) packFee = 25000;
+        if (packaging.includes("Hampers")) packFee = 5000;
+        else if (packaging.includes("Parcel")) packFee = 7000;
 
         const grandTotal = totalSubPrice + packFee;
         container.innerHTML = html;
@@ -579,8 +579,8 @@ let cartArray = [];
         });
 
         let packFee = 0;
-        if (packaging.includes("Hampers")) packFee = 15000;
-        else if (packaging.includes("Parcel")) packFee = 25000;
+        if (packaging.includes("Hampers")) packFee = 5000;
+        else if (packaging.includes("Parcel")) packFee = 7000;
 
         const grandTotal = totalSubPrice + packFee;
 
