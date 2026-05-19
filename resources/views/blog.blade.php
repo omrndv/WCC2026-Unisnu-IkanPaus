@@ -44,7 +44,7 @@
             Semua Cerita
         </a>
 
-        <a href="{{ route('blog', ['category' => 'sejarah']) }}"
+        <a href="{{ route('blog', ['category' => 'kuliner']) }}"
             class="pb-2 whitespace-nowrap transition-all duration-300 {{ $currentCat == 'sejarah' ? 'text-primary border-b-2 border-highlight' : 'text-gray-400 hover:text-primary' }}">
             Sejarah Kuliner
         </a>
