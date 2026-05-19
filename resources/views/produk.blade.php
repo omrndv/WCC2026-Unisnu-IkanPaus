@@ -338,8 +338,8 @@
                     <input type="radio" name="packaging" id="pack-hampers" value="Hampers (Premium)" class="peer sr-only" onchange="updateCartUI()">
                     <label for="pack-hampers" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
                         <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Hampers" class="w-full h-16 object-cover rounded-lg mb-2">
-                        <div class="font-bold text-xs text-primary leading-tight">Hampers</div>
-                        <div class="text-[10px] text-highlight font-medium mt-1">+Rp 15rb</div>
+                        <div class="font-bold text-xs text-primary leading-tight">Besek Besar</div>
+                        <div class="text-[10px] text-highlight font-medium mt-1">+Rp 5rb</div>
                     </label>
                 </div>
 

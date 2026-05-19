@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] bg-gray-100">
-                        <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Getuk Goreng Asri Sokaraja"
+                        <img src="{{ asset('images/produk/fotogetuk.jpeg') }}" alt="Getuk Goreng Asri Sokaraja"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] bg-gray-100">
-                        <img src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="Varian Getuk Goreng Asri"
+                        <img src="{{ asset('images/produk/fotogetuk_2.jpeg') }}" alt="Varian Getuk Goreng Asri"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
