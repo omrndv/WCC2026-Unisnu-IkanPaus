@@ -152,7 +152,7 @@
                         <div class="flex items-start justify-between mb-3">
                             <div>
                                 <h3 class="text-xl font-title font-bold text-primary group-hover:text-secondary transition-colors">{{ $p->nama }}</h3>
-                                <p class="text-sm text-gray-400 mt-1">Box isi 10 pcs</p>
+                                <p class="text-sm text-gray-400 mt-1">Deskripsi Singkat</p>
                             </div>
                             <div class="flex items-center gap-1 text-highlight">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -167,7 +167,7 @@
                         <div class="flex items-end justify-between border-t border-gray-100 pt-6">
                             <div>
                                 <span class="text-2xl font-title font-bold text-secondary">Rp {{ number_format($p->harga, 0, ',', '.') }}</span>
-                                <span class="text-xs text-gray-400 block">/ box</span>
+                                <span class="text-xs text-gray-400 block">/ bungkus</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <button class="qty-minus w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors">-</button>
@@ -210,12 +210,16 @@
                     cucu. Manisnya pas, singkongnya empuk, pengemasannya juga sangat rapi."
                 </p>
                 <div class="flex items-center justify-center gap-4">
-                    <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                        <img src="https://i.pravatar.cc/100?img=5" alt="Customer" class="w-full h-full object-cover">
+                    
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center border-2 border-white shadow-sm shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
                     </div>
+                    
                     <div class="text-left">
                         <h5 class="font-bold text-primary">Ibu Sudjiati</h5>
-                        <p class="text-xs text-gray-500 uppercase tracking-widest">Pelanggan Setia sejak 1990</p>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Pelanggan Setia sejak 1997</p>
                     </div>
                 </div>
             </div>
@@ -241,11 +245,10 @@
                 
                 <div class="p-10 md:p-12">
                     <div id="modal-badges" class="flex flex-wrap gap-2 mb-4"></div>
-                    <h2 id="modal-title" class="text-3xl md:text-4xl font-title font-bold text-primary mb-4"></h2>
+                    <h2 id="modal-title" class="text-3xl md:text-4xl font-title font-bold text-primary mb-1"></h2>
                     
-                    <div class="flex items-center gap-4 mb-6">
+                    <div class="flex items-center gap-4 mb-4">
                         <div class="flex text-highlight" id="modal-rating"></div>
-                        <span class="text-sm text-gray-400">124 ulasan</span>
                     </div>
                     
                     <p id="modal-desc" class="text-gray-600 leading-relaxed mb-8"></p>
@@ -253,11 +256,11 @@
                     <div class="space-y-4 mb-8">
                         <div class="flex items-center gap-3 text-sm text-gray-600">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            Tanpa pengawet & pemanis buatan
+                            Halal dan Aman Dikonsumsi
                         </div>
                         <div class="flex items-center gap-3 text-sm text-gray-600">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            Tahan 7 hari dalam suhu ruang
+                            Tersedia dalam banyak varian rasa unik
                         </div>
                         <div class="flex items-center gap-3 text-sm text-gray-600">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
@@ -268,7 +271,7 @@
                     <div class="flex items-end justify-between border-t border-gray-100 pt-6 mb-8">
                         <div>
                             <span id="modal-price" class="text-4xl font-title font-bold text-secondary"></span>
-                            <span class="text-gray-400 ml-2" id="modal-unit">/ box isi 10 pcs</span>
+                            <span class="text-gray-400 ml-2" id="modal-unit">/ bungkus</span>
                         </div>
                         <div class="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-2">
                             <button class="w-8 h-8 flex items-center justify-center text-primary font-bold text-lg hover:bg-white rounded-full transition-colors modal-qty-minus">-</button>
