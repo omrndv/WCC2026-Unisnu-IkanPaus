@@ -5,7 +5,6 @@
 <div class="max-w-6xl space-y-10">
     <div class="grid md:grid-cols-2 gap-10">
 
-        {{-- IDENTITAS DIGITAL --}}
         <div class="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm space-y-8">
             <h3 class="font-title font-bold text-xl border-b border-bgLight pb-4 text-primary italic text-center">Identitas Digital</h3>
 
@@ -49,7 +48,6 @@
         </div>
 
         <div class="space-y-10">
-            {{-- KONTAK & MAPS --}}
             <div class="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm space-y-8">
                 <h3 class="font-title font-bold text-xl border-b border-bgLight pb-4 text-primary italic text-center">Hubungan Pelanggan</h3>
 
@@ -90,7 +88,6 @@
                         </div>
                     </div>
 
-                    {{-- Jam Operasional --}}
                     <div class="bg-primary p-8 rounded-[2rem] text-white relative overflow-hidden group mt-2">
                         <div class="absolute inset-0 bg-batik-pattern opacity-10 group-hover:scale-110 transition-transform duration-700"></div>
                         <div class="relative z-10 space-y-5">
@@ -120,7 +117,6 @@
         </div>
     </div>
 
-    {{-- SEO --}}
     <div class="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm space-y-8">
         <div class="flex items-center gap-4 border-b border-bgLight pb-6">
             <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">

@@ -45,7 +45,7 @@ Route::get('/admin', [WebsiteController::class, 'admin'])->name('admin.dashboard
 // Produk
 Route::get('/admin/produk', [ProdukController::class, 'index'])->name('admin.produk');
 Route::post('/admin/produk/store', [ProdukController::class, 'store'])->name('admin.produk.store');
-Route::put('/admin/produk/update/{id}', [ProdukController::class, 'update'])->name('admin.produk.update');
+Route::post('/admin/produk/update/{id}', [ProdukController::class, 'update'])->name('admin.produk.update');
 Route::delete('/admin/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('admin.produk.destroy');
 
 // Blog

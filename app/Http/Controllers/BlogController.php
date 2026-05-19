@@ -37,7 +37,7 @@ class BlogController extends Controller
             'status' => $request->status,
             'konten' => $request->konten,
             'gambar' => $path,
-            'penulis' => 'Admin Nadiv' // Bisa lo ganti pake Auth::user()->name nanti
+            'penulis' => 'Admin Asri' // Bisa lo ganti pake Auth::user()->name nanti
         ]);
 
         ActivityLog::catat('Menerbitkan Artikel Blog', 'Judul: ' . $request->judul);
