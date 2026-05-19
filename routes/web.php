@@ -14,6 +14,7 @@ use App\Http\Controllers\QuizController;
 | Public Routes
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', [WebsiteController::class, 'home'])->name('home');
 Route::get('/home', [WebsiteController::class, 'home']);
 Route::get('/tentang', [WebsiteController::class, 'tentang'])->name('tentang');
@@ -51,6 +52,7 @@ Route::delete('/admin/produk/delete/{id}', [ProdukController::class, 'destroy'])
 Route::get('/admin/blog', [BlogController::class, 'index'])->name('admin.blog');
 Route::post('/admin/blog/store', [BlogController::class, 'store'])->name('admin.blog.store');
 Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'destroy'])->name('admin.blog.destroy');
+Route::put('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('admin.blog.update');
 
 // Pesan / Kontak
 Route::get('/admin/pesan', [WebsiteController::class, 'contactList'])->name('admin.contacts');

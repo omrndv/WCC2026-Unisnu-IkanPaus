@@ -32,10 +32,10 @@
             </a>
 
             {{-- Pesan --}}
-            <a href="{{ route('pesan') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('pesan') ? 'text-highlight' : 'hover:text-highlight' }}">
+            {{-- <a href="{{ route('pesan') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('pesan') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Pesan
                 <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('pesan') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
-            </a>
+            </a> --}}
 
             {{-- Kontak --}}
             <a href="{{ route('kontak') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('kontak') ? 'text-highlight' : 'hover:text-highlight' }}">

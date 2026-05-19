@@ -44,6 +44,39 @@ class BlogController extends Controller
         return redirect()->back()->with('success', 'Cerita sudah ditambahkan!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        $request->validate([
+            'judul' => 'required|max:255',
+            'kategori' => 'required',
+            'konten' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $path = $blog->gambar; // Simpan path gambar lama terlebih dahulu
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada gambar baru yang diunggah
+            if ($blog->gambar) {
+                Storage::disk('public')->delete($blog->gambar);
+            }
+            $path = $request->file('gambar')->store('blog', 'public');
+        }
+
+        $blog->update([
+            'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
+            'kategori' => $request->kategori,
+            'status' => $request->status,
+            'konten' => $request->konten,
+            'gambar' => $path,
+        ]);
+
+        ActivityLog::catat('Mengubah Artikel Blog', 'Judul: ' . $request->judul, 'update');
+        return redirect()->back()->with('success', 'Artikel berhasil diperbarui!');
+    }
+
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
