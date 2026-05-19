@@ -51,13 +51,13 @@ class WebsiteController extends Controller
 
     public function kontak()
     {
-        $emailBisnis = Setting::get('email_bisnis', 'halo@getukasri.com');
-        $waNumber = Setting::get('wa_number', '082227771288');
-        $jamBuka = Setting::get('jam_buka', '07:45');
-        $jamTutup = Setting::get('jam_tutup', '19:30');
-        $mapsUrl = Setting::get('maps_url', 'https://www.google.com/maps/embed?pb=!1m18...');
+        $email_bisnis = Setting::get('email_bisnis', 'halo@getukasri.com');
+        $wa_number = Setting::get('wa_number', '082227771288');
+        $jam_buka = Setting::get('jam_buka', '07:45');
+        $jam_tutup = Setting::get('jam_tutup', '19:30');
+        $maps_url = Setting::get('maps_url', 'https://www.google.com/maps/embed?pb=!1m18...');
 
-        return view('kontak', compact('emailBisnis', 'waNumber', 'jamBuka', 'jamTutup', 'mapsUrl'));
+        return view('kontak', compact('email_bisnis', 'wa_number', 'jam_buka', 'jam_tutup', 'maps_url'));
     }
 
     public function storeContact(Request $request)
