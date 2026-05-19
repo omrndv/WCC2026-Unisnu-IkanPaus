@@ -3,60 +3,60 @@
 
 <head>
     @php
-        $seoSettings = \Illuminate\Support\Facades\Cache::remember('seo_settings', 3600, function () {
-            return \App\Models\Setting::pluck('value', 'key')->toArray();
-        });
+    $seoSettings = \Illuminate\Support\Facades\Cache::remember('seo_settings', 3600, function () {
+    return \App\Models\Setting::pluck('value', 'key')->toArray();
+    });
 
-        $webName = $seoSettings['web_name'] ?? 'Getuk Goreng Asri';
+    $webName = $seoSettings['web_name'] ?? 'Getuk Goreng Asri';
 
-        $pageTitle = trim($__env->yieldContent('title'));
-        $pageDescription = trim($__env->yieldContent('description'));
+    $pageTitle = trim($__env->yieldContent('title'));
+    $pageDescription = trim($__env->yieldContent('description'));
 
-        $seoTitle = $pageTitle ?: ($seoSettings['seo_title'] ?? $webName);
-        $seoDescription = $pageDescription ?: ($seoSettings['seo_description'] ?? 'Getuk Goreng khas Sokaraja Banyumas dengan varian Original Jawa dan Durian. Cocok untuk oleh-oleh keluarga, hampers, dan camilan tradisional.');
-        $seoKeywords = $seoSettings['seo_keywords'] ?? 'getuk goreng, getuk goreng sokaraja, getuk goreng banyumas, oleh oleh banyumas, getuk goreng original jawa, getuk goreng durian';
+    $seoTitle = $pageTitle ?: ($seoSettings['seo_title'] ?? $webName);
+    $seoDescription = $pageDescription ?: ($seoSettings['seo_description'] ?? 'Getuk Goreng khas Sokaraja Banyumas dengan varian Original Jawa dan Durian. Cocok untuk oleh-oleh keluarga, hampers, dan camilan tradisional.');
+    $seoKeywords = $seoSettings['seo_keywords'] ?? 'getuk goreng, getuk goreng sokaraja, getuk goreng banyumas, oleh oleh banyumas, getuk goreng original jawa, getuk goreng durian';
 
-        $waNumber = preg_replace('/[^0-9]/', '', $seoSettings['wa_number'] ?? '082227771288');
+    $waNumber = preg_replace('/[^0-9]/', '', $seoSettings['wa_number'] ?? '082227771288');
 
-        if (str_starts_with($waNumber, '0')) {
-            $waNumber = '62' . substr($waNumber, 1);
-        }
+    if (str_starts_with($waNumber, '0')) {
+    $waNumber = '62' . substr($waNumber, 1);
+    }
 
-        $currentUrl = url()->current();
-        $logoUrl = asset('images/logogetuk.png');
-        $ogImage = asset('images/produk/getukgoreng.jpeg');
+    $currentUrl = url()->current();
+    $logoUrl = asset('images/logogetuk.png');
+    $ogImage = asset('images/produk/getukgoreng.jpeg');
 
-        $schemaData = [
-            '@context' => 'https://schema.org',
-            '@type' => 'LocalBusiness',
-            'name' => $webName,
-            'description' => $seoDescription,
-            'url' => url('/'),
-            'logo' => $logoUrl,
-            'image' => $ogImage,
-            'telephone' => '+' . $waNumber,
-            'address' => [
-                '@type' => 'PostalAddress',
-                'addressLocality' => 'Sokaraja',
-                'addressRegion' => 'Jawa Tengah',
-                'addressCountry' => 'ID',
-            ],
-            'sameAs' => [
-                'https://wa.me/' . $waNumber,
-            ],
-        ];
+    $schemaData = [
+    '@context' => 'https://schema.org',
+    '@type' => 'LocalBusiness',
+    'name' => $webName,
+    'description' => $seoDescription,
+    'url' => url('/'),
+    'logo' => $logoUrl,
+    'image' => $ogImage,
+    'telephone' => '+' . $waNumber,
+    'address' => [
+    '@type' => 'PostalAddress',
+    'addressLocality' => 'Sokaraja',
+    'addressRegion' => 'Jawa Tengah',
+    'addressCountry' => 'ID',
+    ],
+    'sameAs' => [
+    'https://wa.me/' . $waNumber,
+    ],
+    ];
 
-        if (!empty($seoSettings['email_bisnis'])) {
-            $schemaData['email'] = $seoSettings['email_bisnis'];
-        }
+    if (!empty($seoSettings['email_bisnis'])) {
+    $schemaData['email'] = $seoSettings['email_bisnis'];
+    }
 
-        if (!empty($seoSettings['maps_url'])) {
-            $schemaData['hasMap'] = $seoSettings['maps_url'];
-        }
+    if (!empty($seoSettings['maps_url'])) {
+    $schemaData['hasMap'] = $seoSettings['maps_url'];
+    }
 
-        if (!empty($seoSettings['jam_buka']) && !empty($seoSettings['jam_tutup'])) {
-            $schemaData['openingHours'] = 'Mo-Su ' . $seoSettings['jam_buka'] . '-' . $seoSettings['jam_tutup'];
-        }
+    if (!empty($seoSettings['jam_buka']) && !empty($seoSettings['jam_tutup'])) {
+    $schemaData['openingHours'] = 'Mo-Su ' . $seoSettings['jam_buka'] . '-' . $seoSettings['jam_tutup'];
+    }
     @endphp
 
     <meta charset="UTF-8">
@@ -84,7 +84,9 @@
     <meta name="twitter:image" content="{{ $ogImage }}">
 
     <script type="application/ld+json">
-        {!! json_encode($schemaData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+        {
+            !!json_encode($schemaData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!
+        }
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -134,6 +136,20 @@
     </script>
 
     <style>
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        main {
+            overflow-x: hidden;
+        }
+
+        section {
+            overflow-x: hidden;
+        }
+        
         .hero-bg {
             background-image: linear-gradient(to bottom, rgba(92, 46, 0, 0.6), rgba(0, 0, 0, 0.7)),
                 url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAFTMowFW85qgPA73oljpBhkFqnbGvNFXHnQlhQZ_bzgkHipcYHLVz1XO9VX2H8pGI4QEZgfkQZULki6omwvSfr9awShwXheMpsJiCuAZNRVYOdvpdHgU2JFOAHI7CqVOuTO5Qw=s1360-w1360-h1020-rw');
@@ -184,31 +200,15 @@
 
     @include('layouts.footer')
 
+    @if (session('success'))
     <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-
-            if (!nav) return;
-
-            if (window.scrollY > 50) {
-                nav.classList.add('py-1', 'max-w-3xl');
-                nav.classList.remove('py-2', 'max-w-7xl');
-            } else {
-                nav.classList.add('py-2', 'max-w-7xl');
-                nav.classList.remove('py-1', 'max-w-3xl');
-            }
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil Keluar',
+            text: "{{ session('success') }}",
+            confirmButtonColor: '#5C2E00',
         });
     </script>
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil Keluar',
-                text: "{{ session('success') }}",
-                confirmButtonColor: '#5C2E00',
-            });
-        </script>
     @endif
 
     @stack('scripts')

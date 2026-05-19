@@ -369,11 +369,15 @@
     }
 
     .about-page .about-reveal-left {
-        transform: translateX(-80px);
+        transform: translateX(-24px);
     }
 
     .about-page .about-reveal-right {
-        transform: translateX(80px);
+        transform: translateX(24px);
+    }
+
+    .about-page {
+        overflow-x: hidden;
     }
 
     .about-page .about-reveal.is-visible {

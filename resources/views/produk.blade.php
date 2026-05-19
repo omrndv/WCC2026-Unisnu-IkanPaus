@@ -184,15 +184,6 @@
             @endforelse
         </div>
 
-        <div class="text-center mt-12 mb-24">
-            <button id="load-more" class="inline-flex items-center gap-3 bg-white border-2 border-primary text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-primary hover:text-white transition-all duration-500 shadow-lg hover:shadow-xl group">
-                <span>Muat Lebih Banyak Varian</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-        </div>
-
         <div class="mb-24 bg-highlight/5 rounded-[2rem] p-10 md:p-16 text-center relative overflow-hidden border border-highlight/10">
             <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-8 left-1/2 -translate-x-1/2 w-32 h-32 text-highlight/10" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -566,10 +557,10 @@ let cartArray = [];
     function checkoutWhatsApp() {
         if (cartArray.length === 0) return alert("Oops, keranjang Anda masih kosong!");
 
-        const phone = "6285228776676";
+        const phone = "6282227771288";
         const packaging = document.querySelector('input[name="packaging"]:checked').value;
         let totalSubPrice = 0;
-        let message = `Halo Admin Getuk Goreng Asri! 👋\n\nSaya ingin melakukan pre-order pesanan berikut:\n\n`;
+        let message = `Halo Admin Getuk Goreng Asri! \n\nSaya ingin melakukan pre-order pesanan berikut:\n\n`;
 
         cartArray.forEach(item => {
             const prod = productsData[item.id];
@@ -584,9 +575,9 @@ let cartArray = [];
 
         const grandTotal = totalSubPrice + packFee;
 
-        message += `\n📦 *Jenis Kemasan:* ${packaging}\n`;
+        message += `\n *Jenis Kemasan:* ${packaging}\n`;
         if (packFee > 0) message += `*Biaya Tambahan Kemasan:* Rp ${packFee.toLocaleString('id-ID')}\n`;
-        message += `\n💰 *Total Estimasi:* Rp ${grandTotal.toLocaleString('id-ID')}\n\nMohon info ketersediaan stoknya ya. Terima kasih! 🙏`;
+        message += `\n *Total Estimasi:* Rp ${grandTotal.toLocaleString('id-ID')}\n\nMohon info ketersediaan stoknya ya. Terima kasih! 🙏`;
 
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
     }
