@@ -3,8 +3,6 @@
 @section('title', 'Getuk Goreng Asri Sokaraja Banyumas')
 @section('description', 'Getuk Goreng Asri menyediakan getuk goreng khas Sokaraja Banyumas varian Original Jawa dan Durian. Cocok untuk oleh-oleh, hampers, dan camilan keluarga.')
 
-@section('hero_image', asset(config('site.hero_image', 'https://lh3.googleusercontent.com/gps-cs-s/APNQkAFTMowFW85qgPA73oljpBhkFqnbGvNFXHnQlhQZ_bzgkHipcYHLVz1XO9VX2H8pGI4QEZgfkQZULki6omwvSfr9awShwXheMpsJiCuAZNRVYOdvpdHgU2JFOAHI7CqVOuTO5Qw=s1360-w1360-h1020-rw')))
-
 @section('content')
 
 <!-- Hero Section -->
@@ -78,7 +76,7 @@
         <div class="grid lg:grid-cols-2 gap-20 items-center">
             <div class="relative rounded-[2.5rem] shadow-2xl story-img group">
                 <div class="img-zoom-container rounded-[2.5rem] border-8 border-white">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBrsvpDDyg29jlxQXR3B1M8tJj7ChIgY925DQM7cLQzmvt4kZgVKAO07JTPaVz7ebn7Gi0RHecO7V1vzhCMdfmPXAu8PByudONcq7QU0Al99dD6oXPYtbhMrW-3-7eUs-_hrBxEO2x9btv/s1600/DSC09354.jpg"
+                    <img src="{{ asset('images/produk/fotogetuk_2.jpeg') }}"
                         alt="Dapur Tradisional Getuk Goreng Asri"
                         class="w-full h-[650px] object-cover"
                         width="800" height="650" loading="lazy">
