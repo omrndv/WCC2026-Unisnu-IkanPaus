@@ -5,7 +5,7 @@
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div class="w-full md:w-auto">
             <p class="text-[10px] font-bold text-highlight uppercase tracking-[0.3em] mb-1">Literasi Digital</p>
-            <h2 class="text-2xl font-title font-bold text-primary italic">Daftar Cerita Asri</h2>
+            <h1 class="text-3xl md:text-4xl font-title font-bold text-primary italic">Daftar Cerita Asri</h1>
         </div>
         <div class="w-full md:w-auto flex justify-start md:justify-end">
             <button onclick="document.getElementById('modalTambahBlog').classList.remove('hidden')" class="w-full md:w-auto bg-primary text-highlight px-8 py-3 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-lg hover:bg-secondary transition-all">
