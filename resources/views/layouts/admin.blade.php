@@ -139,24 +139,20 @@
                 </nav>
             </div>
         </aside>
-
         <main class="flex-1 min-w-0">
             <div class="p-6 md:p-12 mt-20 lg:mt-0">
-                <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-16 border-b border-gray-100 pb-8 gap-6 relative z-10">
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-highlight mb-2 block">Sistem Manajemen</span>
-                        <h1 class="text-3xl md:text-4xl font-title font-bold text-primary italic">@yield('title')</h1>
-                    </div>
-
-                    <div class="flex items-center gap-4 bg-white p-4 md:p-0 rounded-3xl md:bg-transparent shadow-sm md:shadow-none w-full md:w-auto relative">
+                <header class="flex flex-col md:flex-row justify-end items-end mb-4 md:mb-4 border-b border-gray-100 pb-8 gap-6 relative z-10">
+                    
+                    <div class="flex items-center justify-end gap-4 bg-white p-4 md:p-0 rounded-3xl md:bg-transparent shadow-sm md:shadow-none w-full md:w-auto relative">
                         <div class="text-right flex-1 md:flex-none">
                             <p class="text-sm font-bold text-primary" id="greeting">Nadiv Muhammad</p>
                             <p class="text-[9px] md:text-[10px] font-medium text-gray-400 uppercase tracking-widest" id="liveClock">00:00:00 WIB</p>
                         </div>
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-bgLight rounded-full border-2 border-highlight/20 flex items-center justify-center font-title italic font-bold text-primary shadow-sm shrink-0">
-                            N
+                            A
                         </div>
                     </div>
+                    
                 </header>
 
                 <div class="animate-fade-in relative z-0">
@@ -190,7 +186,7 @@
             else if (hours < 15) greet = "Selamat Siang";
             else if (hours < 18) greet = "Selamat Sore";
 
-            if (greetingElement) greetingElement.innerText = `${greet}, Nadiv!`;
+            if (greetingElement) greetingElement.innerText = `${greet}, Asri!`;
             if (clockElement) clockElement.innerText = now.toLocaleTimeString('id-ID') + " WIB";
         }
         setInterval(updateClock, 1000);

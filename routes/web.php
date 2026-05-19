@@ -32,7 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
     Route::post('/produk/store', [ProdukController::class, 'store'])->name('produk.store');
-    Route::put('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
+    Route::post('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');

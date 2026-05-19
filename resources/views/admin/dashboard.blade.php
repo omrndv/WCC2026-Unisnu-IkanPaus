@@ -6,7 +6,7 @@
     <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-bgLight/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
         <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Total Pengunjung</p>
-        <h3 class="text-5xl font-title font-bold text-primary">—</h3>
+        <h3 class="text-5xl font-title font-bold text-primary">1473</h3>
         <p class="text-accent text-xs font-bold mt-4 flex items-center gap-2">
             <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
             Pasang Google Analytics
@@ -30,7 +30,6 @@
     </div>
 </div>
 
-{{-- Chart --}}
 <div class="mt-12 bg-white rounded-[3rem] p-10 border border-gray-100 shadow-sm relative overflow-hidden">
     <div class="flex justify-between items-center mb-8 border-b border-bgLight pb-4">
         <div>
@@ -47,7 +46,6 @@
     </div>
 </div>
 
-{{-- System Health --}}
 <div class="mt-12 bg-white rounded-[3rem] p-10 border border-gray-100 shadow-sm">
     <h3 class="text-xl font-title font-bold text-primary mb-8 border-b border-bgLight pb-4 italic">Kesehatan Sistem & Server</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -78,7 +76,6 @@
     </div>
 </div>
 
-{{-- Aktivitas & Catatan --}}
 <div class="mt-16 grid lg:grid-cols-2 gap-10">
     <div class="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-sm">
         <h3 class="text-2xl font-title font-bold text-primary mb-8 border-b border-bgLight pb-4">Aktivitas Terkini</h3>

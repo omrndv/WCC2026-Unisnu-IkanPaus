@@ -49,22 +49,23 @@ class ProdukController extends Controller
             'nama' => 'required',
             'harga' => 'required|numeric',
             'status' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+
+        $data = [
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'status' => $request->status,
+            'deskripsi' => $request->deskripsi,
+        ];
 
         if ($request->hasFile('gambar')) {
             if ($produk->gambar) {
                 Storage::disk('public')->delete($produk->gambar);
             }
-            $produk->gambar = $request->file('gambar')->store('produk', 'public');
+            $data['gambar'] = $request->file('gambar')->store('produk', 'public');
         }
-
-        $produk->update([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'status' => $request->status,
-            'deskripsi' => $request->deskripsi,
-            'gambar' => $produk->gambar
-        ]);
+        $produk->update($data);
 
         ActivityLog::catat('Memperbarui Varian Produk', 'Nama: ' . $request->nama, 'update');
         return redirect()->back()->with('success', 'Varian berhasil diperbarui!');

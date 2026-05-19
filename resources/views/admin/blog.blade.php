@@ -2,15 +2,16 @@
 @section('title', 'Manajemen Konten & Blog')
 
 @section('content')
-    <div class="mb-10 flex justify-between items-end">
-        <div>
+    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <div class="w-full md:w-auto">
             <p class="text-[10px] font-bold text-highlight uppercase tracking-[0.3em] mb-1">Literasi Digital</p>
             <h2 class="text-2xl font-title font-bold text-primary italic">Daftar Cerita Asri</h2>
         </div>
-        <button onclick="document.getElementById('modalTambahBlog').classList.remove('hidden')"
-            class="bg-primary text-highlight px-8 py-3 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-lg hover:bg-secondary transition-all">
-            + Tulis Artikel Baru
-        </button>
+        <div class="w-full md:w-auto flex justify-start md:justify-end">
+            <button onclick="document.getElementById('modalTambahBlog').classList.remove('hidden')" class="w-full md:w-auto bg-primary text-highlight px-8 py-3 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-lg hover:bg-secondary transition-all">
+                + Tulis Artikel Baru
+            </button>
+        </div>
     </div>
 
     <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
@@ -30,10 +31,8 @@
                         <tr class="hover:bg-bgLight/5 transition-all group">
                             <td class="px-8 py-6">
                                 <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-14 h-14 rounded-xl bg-bgLight border border-gray-100 overflow-hidden shrink-0">
-                                        <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&q=80&w=200' }}"
-                                            class="w-full h-full object-cover">
+                                    <div class="w-14 h-14 rounded-xl bg-bgLight border border-gray-100 overflow-hidden shrink-0">
+                                        <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&q=80&w=200' }}" class="w-full h-full object-cover">
                                     </div>
                                     <div>
                                         <div class="font-bold text-primary text-base">{{ $item->judul }}</div>
@@ -42,34 +41,24 @@
                                 </div>
                             </td>
                             <td class="px-8 py-6">
-                                <span
-                                    class="text-[10px] font-bold text-secondary tracking-widest uppercase">{{ $item->kategori }}</span>
+                                <span class="text-[10px] font-bold text-secondary tracking-widest uppercase">{{ $item->kategori }}</span>
                             </td>
                             <td class="px-8 py-6">
-                                <span
-                                    class="text-[9px] font-bold px-3 py-1 {{ $item->status == 'Published' ? 'bg-accent/10 text-accent border-accent/20' : 'bg-gray-100 text-gray-400' }} rounded-full border">
+                                <span class="text-[9px] font-bold px-3 py-1 {{ $item->status == 'Published' ? 'bg-accent/10 text-accent border-accent/20' : 'bg-gray-100 text-gray-400' }} rounded-full border">
                                     {{ strtoupper($item->status) }}
                                 </span>
                             </td>
                             <td class="px-8 py-6 text-gray-400 font-medium">{{ $item->created_at->format('d M Y') }}</td>
                             <td class="px-8 py-6 text-right">
                                 <div class="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button
-                                        onclick="openEditModal({{ json_encode($item) }}, '{{ asset('storage/' . $item->gambar) }}')"
-                                        class="text-yellow-500 hover:text-yellow-700 transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    <button onclick="openEditModal({{ json_encode($item) }}, '{{ asset('storage/' . $item->gambar) }}')" class="text-yellow-500 hover:text-yellow-700 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                     </button>
-
-                                    <button onclick="confirmDeleteBlog({{ $item->id }}, '{{ $item->judul }}')"
-                                        class="text-red-400 hover:text-red-600 transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    <button onclick="confirmDeleteBlog({{ $item->id }}, '{{ $item->judul }}')" class="text-red-400 hover:text-red-600 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
                                 </div>
@@ -86,51 +75,38 @@
         </div>
     </div>
 
-    {{-- MODAL TAMBAH BLOG --}}
-    <div id="modalTambahBlog"
-        class="hidden fixed inset-0 z-[99] bg-primary/40 backdrop-blur-sm flex items-center justify-center p-6">
-        <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data"
-            class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+    <div id="modalTambahBlog" style="z-index: 99999;" class="hidden fixed inset-0 bg-primary/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6">
+        <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data" class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row relative">
             @csrf
-            <div
-                class="md:w-1/3 bg-bgLight/30 p-10 border-r border-gray-100 flex flex-col items-center justify-center text-center">
-                <h4 class="font-title font-bold text-primary mb-6">Cover Artikel</h4>
-                <div id="imagePreviewContainer"
-                    class="w-full aspect-[3/4] rounded-3xl border-2 border-dashed border-highlight/30 bg-white overflow-hidden flex flex-col items-center justify-center relative group">
+            <div class="md:w-1/3 bg-bgLight/30 p-5 sm:p-10 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col items-center justify-center text-center">
+                <h4 class="font-title font-bold text-primary mb-4 sm:mb-6">Cover Artikel</h4>
+                <div id="imagePreviewContainer" class="w-24 h-32 sm:w-32 sm:h-40 md:w-full md:aspect-[3/4] md:h-auto mx-auto rounded-2xl md:rounded-3xl border-2 border-dashed border-highlight/30 bg-white overflow-hidden flex flex-col items-center justify-center relative group">
                     <img id="previewImage" src="#" class="hidden w-full h-full object-cover">
-                    <div id="placeholderUI" class="p-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-highlight/40 mb-4 mx-auto"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <div id="placeholderUI" class="p-2 sm:p-6 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-12 sm:w-12 text-highlight/40 mb-2 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Klik untuk unggah gambar
-                        </p>
+                        <p class="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Unggah</p>
                     </div>
-                    <input type="file" name="gambar" id="blogImageInput"
-                        class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                    <input type="file" name="gambar" id="blogImageInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
                 </div>
-                <p class="mt-4 text-[9px] text-gray-400 italic">Format: JPG, PNG (Maks 2MB)</p>
             </div>
 
-            <div class="md:flex-1 p-10 space-y-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-2xl font-title font-bold text-primary italic">Tulis Cerita Baru</h3>
-                    <button type="button" onclick="document.getElementById('modalTambahBlog').classList.add('hidden')"
-                        class="text-gray-400 hover:text-red-500 transition-colors">&times; Close</button>
+            <div class="md:flex-1 p-6 sm:p-10 space-y-4 sm:space-y-6">
+                <div class="flex justify-between items-center mb-2 sm:mb-4">
+                    <h3 class="text-xl sm:text-2xl font-title font-bold text-primary italic">Tulis Cerita Baru</h3>
+                    <button type="button" onclick="document.getElementById('modalTambahBlog').classList.add('hidden')" class="text-gray-400 hover:text-red-500 transition-colors text-2xl leading-none">&times;</button>
                 </div>
 
                 <div class="space-y-4">
                     <div class="space-y-1">
                         <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Judul Artikel</label>
-                        <input type="text" name="judul" required placeholder="Contoh: Rahasia Getuk Goreng Renyah..."
-                            class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm font-bold">
+                        <input type="text" name="judul" required placeholder="Contoh: Rahasia Getuk..." class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm font-bold">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Kategori</label>
-                            <select name="kategori"
-                                class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-primary">
+                            <select name="kategori" class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-primary">
                                 <option value="Budaya">Budaya</option>
                                 <option value="Kuliner">Kuliner</option>
                                 <option value="Tips & Trik">Tips & Trik</option>
@@ -138,8 +114,7 @@
                         </div>
                         <div class="space-y-1">
                             <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Status</label>
-                            <select name="status"
-                                class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-accent">
+                            <select name="status" class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-accent">
                                 <option value="Published">Published</option>
                                 <option value="Draft">Draft</option>
                             </select>
@@ -147,65 +122,49 @@
                     </div>
                     <div class="space-y-1">
                         <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Konten Artikel</label>
-                        <textarea name="konten" required rows="5" placeholder="Tuliskan cerita menarik di sini..."
-                            class="w-full px-6 py-4 rounded-[1.5rem] bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm italic leading-relaxed"></textarea>
+                        <textarea name="konten" required rows="5" class="w-full h-32 sm:h-auto px-5 sm:px-6 py-3 sm:py-4 rounded-[1.5rem] bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm italic leading-relaxed"></textarea>
                     </div>
                 </div>
 
-                <button type="submit"
-                    class="w-full bg-primary text-highlight py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] shadow-xl hover:bg-secondary transition-all">Terbitkan
+                <button type="submit" class="w-full bg-primary text-highlight py-3 sm:py-4 mt-2 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] shadow-xl hover:bg-secondary transition-all">Terbitkan
                     Sekarang</button>
             </div>
         </form>
     </div>
 
-    {{-- MODAL EDIT BLOG --}}
-    <div id="modalEditBlog"
-        class="hidden fixed inset-0 z-[99] bg-primary/40 backdrop-blur-sm flex items-center justify-center p-6">
-        <form id="formEditBlog" action="" method="POST" enctype="multipart/form-data"
-            class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+    <div id="modalEditBlog" style="z-index: 99999;" class="hidden fixed inset-0 bg-primary/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6">
+        <form id="formEditBlog" action="" method="POST" enctype="multipart/form-data" class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row relative">
             @csrf
             @method('PUT')
-            <div
-                class="md:w-1/3 bg-bgLight/30 p-10 border-r border-gray-100 flex flex-col items-center justify-center text-center">
-                <h4 class="font-title font-bold text-primary mb-6">Ubah Cover Artikel</h4>
-                <div id="editImagePreviewContainer"
-                    class="w-full aspect-[3/4] rounded-3xl border-2 border-dashed border-highlight/30 bg-white overflow-hidden flex flex-col items-center justify-center relative group">
+
+            <div class="md:w-1/3 bg-bgLight/30 p-5 sm:p-10 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col items-center justify-center text-center">
+                <h4 class="font-title font-bold text-primary mb-4 sm:mb-6">Ubah Cover Artikel</h4>
+                <div id="editImagePreviewContainer" class="w-24 h-32 sm:w-32 sm:h-40 md:w-full md:aspect-[3/4] md:h-auto mx-auto rounded-2xl md:rounded-3xl border-2 border-dashed border-highlight/30 bg-white overflow-hidden flex flex-col items-center justify-center relative group">
                     <img id="editPreviewImage" src="#" class="w-full h-full object-cover">
-                    <div id="editPlaceholderUI" class="p-6 hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-highlight/40 mb-4 mx-auto"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Klik untuk ganti gambar
-                        </p>
+                    <div id="editPlaceholderUI" class="p-2 sm:p-6 hidden">
+                        <p class="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Ganti</p>
                     </div>
-                    <input type="file" name="gambar" id="editBlogImageInput"
-                        class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+
+                    <input type="file" name="gambar" id="editBlogImageInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
                 </div>
-                <p class="mt-4 text-[9px] text-gray-400 italic">Format: JPG, PNG (Maks 2MB). Biarkan kosong jika tidak
-                    ingin mengubah gambar.</p>
             </div>
 
-            <div class="md:flex-1 p-10 space-y-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-2xl font-title font-bold text-primary italic">Edit Cerita</h3>
-                    <button type="button" onclick="document.getElementById('modalEditBlog').classList.add('hidden')"
-                        class="text-gray-400 hover:text-red-500 transition-colors">&times; Close</button>
+            <div class="md:flex-1 p-6 sm:p-10 space-y-4 sm:space-y-6">
+                <div class="flex justify-between items-center mb-2 sm:mb-4">
+                    <h3 class="text-xl sm:text-2xl font-title font-bold text-primary italic">Edit Cerita</h3>
+                    <button type="button" onclick="document.getElementById('modalEditBlog').classList.add('hidden')" class="text-gray-400 hover:text-red-500 transition-colors text-2xl leading-none">&times;</button>
                 </div>
 
                 <div class="space-y-4">
                     <div class="space-y-1">
                         <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Judul Artikel</label>
-                        <input type="text" name="judul" id="editJudul" required
-                            class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm font-bold">
+                        <input type="text" name="judul" id="editJudul" required class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm font-bold">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Kategori</label>
                             <select name="kategori" id="editKategori"
-                                class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-primary">
+                                class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-primary">
                                 <option value="Budaya">Budaya</option>
                                 <option value="Kuliner">Kuliner</option>
                                 <option value="Tips & Trik">Tips & Trik</option>
@@ -213,8 +172,7 @@
                         </div>
                         <div class="space-y-1">
                             <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Status</label>
-                            <select name="status" id="editStatus"
-                                class="w-full px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-accent">
+                            <select name="status" id="editStatus" class="w-full px-5 sm:px-6 py-3 rounded-full bg-bgLight/20 border border-gray-100 outline-none text-xs font-bold text-accent">
                                 <option value="Published">Published</option>
                                 <option value="Draft">Draft</option>
                             </select>
@@ -222,14 +180,15 @@
                     </div>
                     <div class="space-y-1">
                         <label class="text-[9px] font-bold uppercase text-gray-400 ml-4">Konten Artikel</label>
-                        <textarea name="konten" id="editKonten" required rows="5"
-                            class="w-full px-6 py-4 rounded-[1.5rem] bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm italic leading-relaxed"></textarea>
+                        <textarea name="konten" id="editKonten" required rows="5" class="w-full h-32 sm:h-auto px-5 sm:px-6 py-3 sm:py-4 rounded-[1.5rem] bg-bgLight/20 border border-gray-100 outline-none focus:ring-2 focus:ring-highlight text-sm italic leading-relaxed"></textarea>
                     </div>
                 </div>
 
-                <button type="submit"
-                    class="w-full bg-primary text-highlight py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] shadow-xl hover:bg-secondary transition-all">Simpan
-                    Perubahan</button>
+                <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 mt-4">
+                    <button type="button" onclick="document.getElementById('modalEditBlog').classList.add('hidden')" class="w-full sm:flex-1 bg-gray-100 text-gray-500 py-3 sm:py-4 rounded-full font-bold uppercase text-[10px]">Batal</button>
+                    <button type="submit" class="w-full sm:flex-[2] bg-primary text-highlight py-3 sm:py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] shadow-xl hover:bg-secondary transition-all">
+                        Simpan Perubahan</button>
+                </div>
             </div>
         </form>
     </div>
@@ -237,7 +196,15 @@
 
 @push('scripts')
     <script>
-        // PREVIEW IMAGE
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const modalTambah = document.getElementById('modalTambahBlog');
+            const modalEdit = document.getElementById('modalEditBlog');
+
+            if (modalTambah) document.body.appendChild(modalTambah);
+            if (modalEdit) document.body.appendChild(modalEdit);
+        });
+
         const fileInput = document.getElementById('blogImageInput');
         const previewImage = document.getElementById('previewImage');
         const placeholderUI = document.getElementById('placeholderUI');
@@ -257,7 +224,6 @@
             });
         }
 
-        // DELETE BLOG
         function confirmDeleteBlog(id, title) {
             Swal.fire({
                 title: 'Hapus Artikel?',
@@ -304,29 +270,23 @@
         }
 
         function openEditModal(blog, imageUrl) {
-            // Set Action Form secara dinamis menggunakan ID blog
             document.getElementById('formEditBlog').action = '/admin/blog/update/' + blog.id;
-
-            // Isi value ke form field modal edit
             document.getElementById('editJudul').value = blog.judul;
             document.getElementById('editKategori').value = blog.kategori;
             document.getElementById('editStatus').value = blog.status;
             document.getElementById('editKonten').value = blog.konten;
 
-            // Set Preview Gambar
             if (blog.gambar) {
                 editPreviewImage.src = imageUrl;
                 editPreviewImage.classList.remove('hidden');
                 editPlaceholderUI.classList.add('hidden');
             } else {
-                // Fallback default image jika artikel tidak memiliki image
                 editPreviewImage.src =
                     'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&q=80&w=200';
                 editPreviewImage.classList.remove('hidden');
                 editPlaceholderUI.classList.add('hidden');
             }
 
-            // Tampilkan Modal
             document.getElementById('modalEditBlog').classList.remove('hidden');
         }
     </script>

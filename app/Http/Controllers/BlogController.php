@@ -27,13 +27,20 @@ class BlogController extends Controller
             'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
-        $validated['slug'] = Str::slug($validated['judul']);
-        $validated['penulis'] = 'Admin Nadiv';
-        $validated['gambar'] = $request->hasFile('gambar')
-            ? $request->file('gambar')->store('blog', 'public')
-            : null;
+        $path = null;
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('blog', 'public');
+        }
 
-        Blog::create($validated);
+        Blog::create([
+            'judul' => $request->judul,
+            'slug' => Str::slug($request->judul), // Otomatis jadi 'judul-artikel-lo'
+            'kategori' => $request->kategori,
+            'status' => $request->status,
+            'konten' => $request->konten,
+            'gambar' => $path,
+            'penulis' => 'Admin Asri' // Bisa lo ganti pake Auth::user()->name nanti
+        ]);
 
         ActivityLog::catat('Menerbitkan Artikel Blog', 'Judul: ' . $validated['judul']);
 

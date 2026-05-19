@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status'); // Draft / Published
             $table->text('konten');
             $table->string('gambar')->nullable();
-            $table->string('penulis')->default('Admin Nadiv');
+            $table->string('penulis')->default('Admin Asri');
             $table->timestamps();
         });
     }
