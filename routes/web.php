@@ -41,6 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
     Route::get('/pesan', [AdminController::class, 'contactList'])->name('contacts');
+    Route::delete('/contacts/{id}', [AdminController::class, 'destroyContact'])->name('admin.contacts.destroy');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
     Route::post('/settings/identitas', [SettingController::class, 'saveIdentitas'])->name('settings.identitas');

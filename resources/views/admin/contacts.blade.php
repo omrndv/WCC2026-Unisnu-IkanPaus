@@ -51,6 +51,9 @@
                         <button onclick="viewMessage('{{ $p->nama }}', '{{ $p->pesan }}')" class="bg-white border border-primary text-primary px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-sm">
                             Buka Pesan
                         </button>
+                        <button onclick="confirmDeletePesan({{ $p->id }}, @js($p->nama))" class="bg-red-50 border border-red-200 text-red-500 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-sm">
+                            Hapus
+                        </button>
                     </td>
                 </tr>
                 @empty
@@ -78,5 +81,35 @@
             padding: '2rem'
         });
     }
+
+    function confirmDeletePesan(id, nama) {
+    Swal.fire({
+        title: 'Hapus Pesan?',
+        text: `Pesan dari ${nama} akan dihapus permanen.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#5C2E00',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
+        background: '#F5E6D3',
+        color: '#5C2E00',
+        borderRadius: '2rem'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `/admin/contacts/${id}`;
+
+            form.innerHTML = `
+                @csrf
+                @method('DELETE')
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+}
 </script>
 @endpush

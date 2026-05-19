@@ -3,31 +3,53 @@
 
 @section('content')
 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
     <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-bgLight/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Total Pengunjung</p>
-        <h3 class="text-5xl font-title font-bold text-primary">1473</h3>
+        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+            Total Produk
+        </p>
+        <h3 class="text-5xl font-title font-bold text-primary">
+            {{ $totalProduk }}
+        </h3>
         <p class="text-accent text-xs font-bold mt-4 flex items-center gap-2">
             <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-            Pasang Google Analytics
+            Produk tersedia di katalog
         </p>
     </div>
 
+
     <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
-        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Pesan Masuk</p>
-        <h3 class="text-5xl font-title font-bold text-primary">{{ $totalPesan }}</h3>
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-highlight/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+            Pesan Masuk
+        </p>
+        <h3 class="text-5xl font-title font-bold text-primary">
+            {{ $totalPesan }}
+        </h3>
         <p class="text-highlight text-xs font-bold mt-4">
-            <a href="{{ route('admin.contacts') }}" class="hover:underline">Lihat Semua Pesan →</a>
+            <a href="{{ route('admin.contacts') }}" class="hover:underline">
+                Lihat Semua Pesan →
+            </a>
         </p>
     </div>
 
+
     <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
-        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Varian Aktif</p>
-        <h3 class="text-5xl font-title font-bold text-primary">{{ $totalProduk }}</h3>
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+            Total Artikel
+        </p>
+        <h3 class="text-5xl font-title font-bold text-primary">
+            {{ $totalBlog }}
+        </h3>
         <p class="text-secondary text-xs font-bold mt-4 italic">
-            <a href="{{ route('admin.produk') }}" class="hover:underline">Kelola Katalog →</a>
+            <a href="{{ route('admin.blog') }}" class="hover:underline">
+                Kelola Artikel →
+            </a>
         </p>
     </div>
+
 </div>
 
 <div class="mt-12 bg-white rounded-[3rem] p-10 border border-gray-100 shadow-sm relative overflow-hidden">

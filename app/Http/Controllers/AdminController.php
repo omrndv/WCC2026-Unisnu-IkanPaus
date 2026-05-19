@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Cache;
@@ -27,9 +28,15 @@ class AdminController extends Controller
 
         $totalPesan = Contact::count();
         $totalProduk = Produk::where('status', 'tersedia')->count();
+        $totalBlog = Blog::count();
         $recentLogs = ActivityLog::latest()->take(2)->get();
 
-        return view('admin.dashboard', compact('totalPesan', 'totalProduk', 'recentLogs'));
+        return view('admin.dashboard', compact(
+            'totalPesan',
+            'totalProduk',
+            'totalBlog',
+            'recentLogs'
+        ));
     }
 
     public function contactList()
@@ -42,6 +49,20 @@ class AdminController extends Controller
         $totalPesan = $pesan->count();
 
         return view('admin.contacts', compact('pesan', 'totalPesan'));
+    }
+
+    public function destroyContact($id)
+    {
+        if ($redirect = $this->checkAdmin()) {
+            return $redirect;
+        }
+
+        $pesan = Contact::findOrFail($id);
+        $pesan->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Pesan berhasil dihapus!');
     }
 
     public function logs()
