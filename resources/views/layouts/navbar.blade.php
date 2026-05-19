@@ -31,12 +31,6 @@
                 <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('blog') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
             </a>
 
-            {{-- Pesan --}}
-            {{-- <a href="{{ route('pesan') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('pesan') ? 'text-highlight' : 'hover:text-highlight' }}">
-                Pesan
-                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-highlight transition-all duration-300 {{ Route::is('pesan') ? 'w-1/2' : 'w-0 group-hover:w-1/2' }}"></span>
-            </a> --}}
-
             {{-- Kontak --}}
             <a href="{{ route('kontak') }}" class="px-3 py-2 transition-all duration-300 relative group {{ Route::is('kontak') ? 'text-highlight' : 'hover:text-highlight' }}">
                 Kontak
@@ -45,7 +39,7 @@
         </div>
 
         <div class="shrink-0">
-            <a href="{{ url('/order') }}" class="inline-block bg-highlight hover:bg-secondary text-white px-8 py-3 rounded-full font-bold transition-all duration-300 text-[10px] uppercase tracking-widest shadow-lg transform hover:-translate-y-0.5">
+            <a href="https://wa.me/6282227771288" class="inline-block bg-highlight hover:bg-secondary text-white px-8 py-3 rounded-full font-bold transition-all duration-300 text-[10px] uppercase tracking-widest shadow-lg transform hover:-translate-y-0.5">
                 Beli Sekarang
             </a>
         </div>

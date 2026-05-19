@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Hubungi Kami')
+@section('title', 'Kontak dan Lokasi Getuk Goreng Asri')
+@section('description', 'Hubungi Getuk Goreng Asri untuk pemesanan getuk goreng khas Sokaraja Banyumas, informasi lokasi toko, jam operasional, kerja sama reseller, dan pertanyaan produk.')
 
 @section('content')
 <section class="pt-40 pb-20 bg-primary relative overflow-hidden">
@@ -19,7 +20,6 @@
         <div class="flex flex-col lg:flex-row gap-16">
 
             <div class="lg:w-1/3 space-y-8 relative z-10">
-                {{-- Card Lokasi --}}
                 <div class="contact-info bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
                     <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-highlight mb-6 shadow-lg shadow-primary/20">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,7 +31,6 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Jl. Raya Sokaraja No. 5, Dusun I, Sokaraja Kulon, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah 53181</p>
                 </div>
 
-                {{-- Card Email & WA --}}
                 <div class="contact-info bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
                     <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-highlight mb-6 shadow-lg shadow-primary/20">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +44,6 @@
                     </p>
                 </div>
 
-                {{-- Card Jam Operasional --}}
                 <div class="contact-info bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
                     <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-highlight mb-6 shadow-lg shadow-primary/20">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,10 +56,7 @@
                 </div>
             </div>
 
-            {{-- Form --}}
             <div class="lg:w-2/3 bg-[#FAFAFA] p-10 md:p-16 rounded-[3rem] border border-gray-100 shadow-sm slide-up-form">
-
-                {{-- Flash Success --}}
                 @if(session('success'))
                 <div class="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-2xl text-sm font-medium mb-8 flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,7 +70,6 @@
                     @csrf
 
                     <div class="grid md:grid-cols-2 gap-8">
-                        {{-- Nama --}}
                         <div class="space-y-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Nama Lengkap</label>
                             <input
@@ -89,7 +83,6 @@
                             @enderror
                         </div>
 
-                        {{-- Email --}}
                         <div class="space-y-2">
                             <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Alamat Email</label>
                             <input
@@ -104,7 +97,6 @@
                         </div>
                     </div>
 
-                    {{-- Subjek --}}
                     <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Subjek Pesan</label>
                         <select name="subjek" class="w-full px-8 py-4 rounded-full bg-white border border-gray-200 focus:ring-2 focus:ring-highlight outline-none transition-all appearance-none">
@@ -114,7 +106,6 @@
                         </select>
                     </div>
 
-                    {{-- Pesan --}}
                     <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-primary ml-4">Pesan Anda</label>
                         <textarea
@@ -127,7 +118,6 @@
                         @enderror
                     </div>
 
-                    {{-- Submit --}}
                     <button type="submit" class="w-full bg-primary text-white py-5 rounded-full font-bold text-lg hover:bg-secondary transition duration-300 shadow-xl flex items-center justify-center gap-3 group">
                         Kirim Pesan
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-2 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,39 +149,77 @@
 </section>
 @endsection
 
+@push('styles')
+    <style>
+        .slide-up,
+        .contact-info,
+        .slide-up-form {
+            opacity: 0;
+            transform: translateY(50px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .contact-info {
+            transform: translateX(-30px);
+        }
+
+        .slide-up-form {
+            transform: translateY(100px);
+        }
+
+        .animate-visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .slide-up:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        h1.slide-up {
+            transition-delay: 0.25s;
+        }
+
+        p.slide-up {
+            transition-delay: 0.4s;
+        }
+
+        .contact-info:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .contact-info:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+
+        .contact-info:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+    </style>
+@endpush
+
 @push('scripts')
 <script>
-    gsap.from(".slide-up", {
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        ease: "power3.out"
-    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const animatedElements = document.querySelectorAll(".slide-up, .contact-info, .slide-up-form");
 
-    gsap.from(".contact-info", {
-        scrollTrigger: {
-            trigger: ".contact-info",
-            start: "top 95%",
-            toggleActions: "play none none none"
-        },
-        x: -30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out",
-        clearProps: "all"
-    });
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
 
-    gsap.from(".slide-up-form", {
-        scrollTrigger: {
-            trigger: ".slide-up-form",
-            start: "top 80%",
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out"
+                entry.target.classList.add("animate-visible");
+                observer.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -40px 0px"
+        });
+
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
     });
 </script>
 @endpush

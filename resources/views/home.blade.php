@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Warisan Rasa Banyumas')
+@section('title', 'Getuk Goreng Asri Sokaraja Banyumas')
+@section('description', 'Getuk Goreng Asri menyediakan getuk goreng khas Sokaraja Banyumas varian Original Jawa dan Durian. Cocok untuk oleh-oleh, hampers, dan camilan keluarga.')
 
 @section('hero_image', asset(config('site.hero_image', 'https://lh3.googleusercontent.com/gps-cs-s/APNQkAFTMowFW85qgPA73oljpBhkFqnbGvNFXHnQlhQZ_bzgkHipcYHLVz1XO9VX2H8pGI4QEZgfkQZULki6omwvSfr9awShwXheMpsJiCuAZNRVYOdvpdHgU2JFOAHI7CqVOuTO5Qw=s1360-w1360-h1020-rw')))
 
@@ -49,21 +50,21 @@
 <!-- Live Counter Section -->
 <section class="py-20 bg-white relative z-10 -mt-1 shadow-md">
     <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-primary divide-x divide-gray-100">
-        <div class="gsap-counter-box px-4">
+        <div class="counter-box px-4">
             <div class="text-5xl md:text-6xl font-title font-bold mb-2 text-secondary">
                 <span class="counter" data-target="{{ date('Y') - 1990 }}">0</span>+
             </div>
             <p class="text-xs text-gray-500 uppercase tracking-[0.2em] font-semibold">Tahun Berdiri</p>
         </div>
-        <div class="gsap-counter-box px-4">
+        <div class="counter-box px-4">
             <div class="text-5xl md:text-6xl font-title font-bold mb-2 text-secondary"><span class="counter" data-target="100">0</span>K+</div>
             <p class="text-xs text-gray-500 uppercase tracking-[0.2em] font-semibold">Produk Terjual</p>
         </div>
-        <div class="gsap-counter-box px-4">
+        <div class="counter-box px-4">
             <div class="text-5xl md:text-6xl font-title font-bold mb-2 text-secondary"><span class="counter" data-target="5000">0</span>+</div>
             <p class="text-xs text-gray-500 uppercase tracking-[0.2em] font-semibold">Pelanggan Puas</p>
         </div>
-        <div class="gsap-counter-box px-4">
+        <div class="counter-box px-4">
             <div class="text-5xl md:text-6xl font-title font-bold mb-2 text-secondary"><span class="counter" data-target="50"></span>+</div>
             <p class="text-xs text-gray-500 uppercase tracking-[0.2em] font-semibold">Varian Produk</p>
         </div>
@@ -178,10 +179,6 @@
             </div>
 
             <div class="p-8 relative z-10 bg-white flex flex-col grow">
-                {{--
-                    Tombol keranjang → langsung ke WA dengan pesan otomatis berisi nama & harga produk.
-                    Tidak perlu route cart.add sama sekali.
-                --}}
                 @php
                 $pesanWa = urlencode("Halo, saya tertarik memesan *{$p->nama}* (Rp " . number_format($p->harga, 0, ',', '.') . "). Apakah masih tersedia?");
                 @endphp
@@ -292,125 +289,175 @@
 </section>
 @endsection
 
+@push('styles')
 <style>
-    .quiz-elem {
+    .slide-up {
         opacity: 0;
-        transform: translateY(50px);
-        transition: all 0.8s ease;
+        transform: translateY(80px);
+        animation: slideUpReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    .quiz-elem.show {
+    .hero-content>div:nth-child(1) .slide-up {
+        animation-delay: 0.3s;
+    }
+
+    .hero-content>div:nth-child(2) .slide-up {
+        animation-delay: 0.5s;
+    }
+
+    .hero-content>div:nth-child(3) .slide-up {
+        animation-delay: 0.7s;
+    }
+
+    .hero-content>div:nth-child(4) .slide-up {
+        animation-delay: 0.9s;
+    }
+
+    .story-img,
+    .story-text,
+    .quiz-elem,
+    .product-card {
+        opacity: 0;
+        transition-property: opacity, transform;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        transition-duration: 0.9s;
+        will-change: opacity, transform;
+    }
+
+    .story-img {
+        transform: translateX(-60px);
+    }
+
+    .story-text {
+        transform: translateX(60px);
+        transition-delay: 0.2s;
+    }
+
+    .quiz-elem,
+    .product-card {
+        transform: translateY(50px);
+    }
+
+    .story-img.show,
+    .story-text.show,
+    .quiz-elem.show,
+    .product-card.show {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(0, 0);
+    }
+
+    @keyframes slideUpReveal {
+        from {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .slide-up,
+        .story-img,
+        .story-text,
+        .quiz-elem,
+        .product-card {
+            opacity: 1;
+            transform: none;
+            animation: none;
+            transition: none;
+        }
     }
 </style>
+@endpush
 
 @push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
-            console.error("GSAP / ScrollTrigger belum ke-load");
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const animateCounter = (counter) => {
+            const target = Number(counter.getAttribute("data-target")) || 0;
+            const duration = 2500;
+            const startTime = performance.now();
+
+            const updateCounter = (currentTime) => {
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.round(target * easedProgress);
+
+                counter.textContent = currentValue.toLocaleString("id-ID");
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            };
+
+            requestAnimationFrame(updateCounter);
+        };
+
+        const runCounters = () => {
+            document.querySelectorAll(".counter").forEach((counter) => {
+                if (counter.dataset.animated === "true") {
+                    return;
+                }
+
+                counter.dataset.animated = "true";
+                animateCounter(counter);
+            });
+        };
+
+        if (prefersReducedMotion) {
+            document.querySelectorAll(".counter").forEach((counter) => {
+                const target = Number(counter.getAttribute("data-target")) || 0;
+                counter.textContent = target.toLocaleString("id-ID");
+            });
+
+            document.querySelectorAll(".story-img, .story-text, .quiz-elem, .product-card").forEach((el) => {
+                el.classList.add("show");
+            });
+
             return;
         }
 
-        gsap.registerPlugin(ScrollTrigger);
+        const counterSection = document.querySelector(".counter-box");
 
-        gsap.from(".slide-up", {
-            duration: 1.2,
-            y: 80,
-            opacity: 0,
-            stagger: 0.2,
-            ease: "power4.out",
-            delay: 0.3
-        });
-
-        const counterBox = document.querySelector(".gsap-counter-box");
-
-        if (counterBox) {
-            document.querySelectorAll(".counter").forEach(counter => {
-                const target = Number(counter.getAttribute("data-target")) || 0;
-                const obj = {
-                    val: 0
-                };
-
-                gsap.to(obj, {
-                    scrollTrigger: {
-                        trigger: counterBox,
-                        start: "top 90%",
-                        once: true
-                    },
-                    val: target,
-                    duration: 2.5,
-                    ease: "power2.out",
-                    onUpdate: () => {
-                        counter.textContent = Math.round(obj.val).toLocaleString("id-ID");
-                    }
-                });
-            });
-        }
-
-        if (document.querySelector(".story-img")) {
-            gsap.from(".story-img", {
-                scrollTrigger: {
-                    trigger: ".story-img",
-                    start: "top 75%",
-                    once: true
-                },
-                x: -60,
-                opacity: 0,
-                duration: 1.5,
-                ease: "power3.out"
-            });
-        }
-
-        if (document.querySelector(".story-text")) {
-            gsap.from(".story-text", {
-                scrollTrigger: {
-                    trigger: ".story-text",
-                    start: "top 75%",
-                    once: true
-                },
-                x: 60,
-                opacity: 0,
-                duration: 1.5,
-                ease: "power3.out",
-                delay: 0.2
-            });
-        }
-
-        if (document.querySelector(".quiz-elem")) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+        if (counterSection) {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("show");
+                        runCounters();
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
                 threshold: 0.2
             });
 
-            document.querySelectorAll(".quiz-elem").forEach((el, index) => {
-                el.style.transitionDelay = `${index * 0.2}s`;
-                observer.observe(el);
-            });
+            counterObserver.observe(counterSection);
         }
 
-        if (document.querySelector("#produk") && document.querySelector(".product-card")) {
-            gsap.from(".product-card", {
-                scrollTrigger: {
-                    trigger: "#produk",
-                    start: "top 85%",
-                    once: true
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    observer.unobserve(entry.target);
+                }
             });
-        }
+        }, {
+            threshold: 0.18
+        });
 
-        ScrollTrigger.refresh();
+        document.querySelectorAll(".story-img, .story-text, .quiz-elem, .product-card").forEach((el, index) => {
+            if (el.classList.contains("quiz-elem") || el.classList.contains("product-card")) {
+                el.style.transitionDelay = `${(index % 6) * 0.12}s`;
+            }
+
+            revealObserver.observe(el);
+        });
     });
 </script>
 @endpush

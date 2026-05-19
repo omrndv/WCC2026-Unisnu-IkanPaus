@@ -8,67 +8,100 @@ class QuizController extends Controller
 {
     private array $questions = [
         [
-            'id'       => 1,
-            'teks'     => 'Gimana mood kamu hari ini?',
-            'pilihan'  => [
-                'a' => ['label' => '☀️ Semangat & Ceria',   'tag' => 'manis'],
-                'b' => ['label' => '😌 Santai & Tenang',     'tag' => 'original'],
-                'c' => ['label' => '🌧️ Butuh Mood Booster',  'tag' => 'cokelat'],
-                'd' => ['label' => '🔥 Pengen Sesuatu Beda', 'tag' => 'keju'],
+            'id' => 1,
+            'teks' => 'Gimana mood kamu hari ini?',
+            'pilihan' => [
+                'a' => [
+                    'emoji' => '😌',
+                    'label' => 'Santai & Pengen yang Aman',
+                    'tag' => 'original',
+                ],
+                'b' => [
+                    'emoji' => '🔥',
+                    'label' => 'Pengen Rasa yang Beda',
+                    'tag' => 'durian',
+                ],
+                'c' => [
+                    'emoji' => '🌿',
+                    'label' => 'Lagi Kangen Rasa Tradisional',
+                    'tag' => 'original',
+                ],
+                'd' => [
+                    'emoji' => '🤩',
+                    'label' => 'Lagi Pengen yang Beraroma Khas',
+                    'tag' => 'durian',
+                ],
             ],
         ],
         [
-            'id'       => 2,
-            'teks'     => 'Kamu lebih suka rasa yang...',
-            'pilihan'  => [
-                'a' => ['label' => '🍬 Manis Legit',         'tag' => 'manis'],
-                'b' => ['label' => '🌿 Natural & Sederhana', 'tag' => 'original'],
-                'c' => ['label' => '🍫 Cokelat Creamy',      'tag' => 'cokelat'],
-                'd' => ['label' => '🧀 Gurih Unik',          'tag' => 'keju'],
+            'id' => 2,
+            'teks' => 'Kamu lebih suka rasa yang...',
+            'pilihan' => [
+                'a' => [
+                    'emoji' => '🍯',
+                    'label' => 'Manis Klasik dan Familiar',
+                    'tag' => 'original',
+                ],
+                'b' => [
+                    'emoji' => '🥭',
+                    'label' => 'Manis Legit dengan Aroma Kuat',
+                    'tag' => 'durian',
+                ],
+                'c' => [
+                    'emoji' => '🌾',
+                    'label' => 'Sederhana tapi Bikin Nyaman',
+                    'tag' => 'original',
+                ],
+                'd' => [
+                    'emoji' => '💛',
+                    'label' => 'Unik, Creamy, dan Lebih Berani',
+                    'tag' => 'durian',
+                ],
             ],
         ],
         [
-            'id'       => 3,
-            'teks'     => 'Getuk ini buat siapa?',
-            'pilihan'  => [
-                'a' => ['label' => '👨‍👩‍👧 Oleh-oleh Keluarga', 'tag' => 'original'],
-                'b' => ['label' => '🧒 Camilan Anak-anak',   'tag' => 'cokelat'],
-                'c' => ['label' => '🎁 Hampers / Hadiah',    'tag' => 'manis'],
-                'd' => ['label' => '🙋 Buat Diri Sendiri',   'tag' => 'keju'],
+            'id' => 3,
+            'teks' => 'Getuk ini rencananya buat siapa?',
+            'pilihan' => [
+                'a' => [
+                    'emoji' => '👨‍👩‍👧',
+                    'label' => 'Oleh-oleh Keluarga',
+                    'tag' => 'original',
+                ],
+                'b' => [
+                    'emoji' => '🙋',
+                    'label' => 'Buat Diri Sendiri',
+                    'tag' => 'durian',
+                ],
+                'c' => [
+                    'emoji' => '🎁',
+                    'label' => 'Hadiah yang Aman untuk Banyak Orang',
+                    'tag' => 'original',
+                ],
+                'd' => [
+                    'emoji' => '😋',
+                    'label' => 'Buat Pecinta Durian',
+                    'tag' => 'durian',
+                ],
             ],
         ],
     ];
 
     private array $recommendations = [
-        'manis' => [
-            'varian'     => 'Getuk Goreng Gula Merah Extra',
-            'deskripsi'  => 'Manisnya gula merah murni yang meresap sempurna ke dalam singkong pilihan. Cocok banget buat kamu yang suka rasa legit dan tradisional.',
-            'emoji'      => '🍯',
-            'warna'      => 'bg-amber-500',
-        ],
         'original' => [
-            'varian'     => 'Getuk Goreng Original Asri',
-            'deskripsi'  => 'Resep asli sejak 1940 — rasa autentik tanpa tambahan apa-apa. Pilihan terbaik untuk oleh-oleh keluarga yang ingin merasakan warisan rasa Banyumas.',
-            'emoji'      => '✨',
-            'warna'      => 'bg-yellow-600',
+            'varian' => 'Getuk Goreng Original Jawa',
+            'deskripsi' => 'Pilihan paling aman dan klasik. Rasa manis khas getuk goreng yang sederhana, familiar, dan cocok untuk oleh-oleh keluarga maupun teman.',
+            'emoji' => '🌿',
+            'warna' => 'bg-yellow-600',
         ],
-        'cokelat' => [
-            'varian'     => 'Getuk Goreng Cokelat',
-            'deskripsi'  => 'Perpaduan getuk tradisional dengan cokelat creamy yang bikin nagih. Favorit anak-anak dan mood booster nomor satu!',
-            'emoji'      => '🍫',
-            'warna'      => 'bg-amber-800',
-        ],
-        'keju' => [
-            'varian'     => 'Getuk Goreng Keju',
-            'deskripsi'  => 'Gurih keju berpadu dengan manisnya getuk — kombinasi tak terduga yang langsung jadi favorit. Cocok buat kamu yang suka hal-hal unik!',
-            'emoji'      => '🧀',
-            'warna'      => 'bg-yellow-400',
+        'durian' => [
+            'varian' => 'Getuk Goreng Durian',
+            'deskripsi' => 'Cocok buat kamu yang suka rasa lebih unik dan berani. Perpaduan getuk goreng dengan aroma durian yang khas bikin rasanya lebih legit dan beda dari biasanya.',
+            'emoji' => '💛',
+            'warna' => 'bg-amber-500',
         ],
     ];
 
-    /**
-     * Tampilkan halaman quiz.
-     */
     public function index()
     {
         return view('quiz.index', [
@@ -76,35 +109,34 @@ class QuizController extends Controller
         ]);
     }
 
-    /**
-     * Proses jawaban dan tampilkan hasil.
-     */
     public function result(Request $request)
     {
         $request->validate([
-            'jawaban'   => ['required', 'array', 'size:' . count($this->questions)],
+            'jawaban' => ['required', 'array', 'size:' . count($this->questions)],
             'jawaban.*' => ['required', 'in:a,b,c,d'],
         ]);
 
-        // Hitung tag terbanyak dari jawaban
-        $tagCount = [];
-        foreach ($this->questions as $q) {
-            $jawaban = $request->input("jawaban.{$q['id']}");
-            if ($jawaban && isset($q['pilihan'][$jawaban])) {
-                $tag = $q['pilihan'][$jawaban]['tag'];
-                $tagCount[$tag] = ($tagCount[$tag] ?? 0) + 1;
+        $scores = [
+            'original' => 0,
+            'durian' => 0,
+        ];
+
+        foreach ($this->questions as $question) {
+            $answer = $request->input("jawaban.{$question['id']}");
+            $tag = $question['pilihan'][$answer]['tag'] ?? 'original';
+
+            if (isset($scores[$tag])) {
+                $scores[$tag]++;
             }
         }
 
-        // Ambil tag dengan skor tertinggi (jika seri, ambil yang pertama)
-        arsort($tagCount);
-        $winnerTag = array_key_first($tagCount);
+        arsort($scores);
 
-        $rekomendasi = $this->recommendations[$winnerTag] ?? $this->recommendations['original'];
+        $winnerTag = array_key_first($scores) ?? 'original';
 
         return view('quiz.result', [
-            'rekomendasi' => $rekomendasi,
-            'tag'         => $winnerTag,
+            'tag' => $winnerTag,
+            'rekomendasi' => $this->recommendations[$winnerTag],
         ]);
     }
 }

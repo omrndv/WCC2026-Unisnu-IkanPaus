@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\ActivityLog;
 
 class SettingController extends Controller
 {
@@ -13,7 +13,7 @@ class SettingController extends Controller
     {
         if (!Session::has('admin_auth')) return redirect()->route('admin.login');
 
-        $settings = Setting::pluck('value', 'key'); // ['web_name' => 'Getuk Goreng Asri', ...]
+        $settings = Setting::pluck('value', 'key');
         return view('admin.settings', compact('settings'));
     }
 

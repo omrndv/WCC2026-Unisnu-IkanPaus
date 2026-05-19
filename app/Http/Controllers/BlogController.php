@@ -5,87 +5,89 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
     public function index()
     {
         $blogs = Blog::latest()->get();
+
         return view('admin.blog', compact('blogs'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required|max:255',
-            'kategori' => 'required',
-            'konten' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        $validated = $request->validate([
+            'judul' => ['required', 'string', 'max:255'],
+            'kategori' => ['required', 'string', 'max:100'],
+            'status' => ['required', 'in:draft,published'],
+            'konten' => ['required', 'string'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
-        $path = null;
-        if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('blog', 'public');
-        }
+        $validated['slug'] = Str::slug($validated['judul']);
+        $validated['penulis'] = 'Admin Nadiv';
+        $validated['gambar'] = $request->hasFile('gambar')
+            ? $request->file('gambar')->store('blog', 'public')
+            : null;
 
-        Blog::create([
-            'judul' => $request->judul,
-            'slug' => Str::slug($request->judul), // Otomatis jadi 'judul-artikel-lo'
-            'kategori' => $request->kategori,
-            'status' => $request->status,
-            'konten' => $request->konten,
-            'gambar' => $path,
-            'penulis' => 'Admin Nadiv' // Bisa lo ganti pake Auth::user()->name nanti
-        ]);
+        Blog::create($validated);
 
-        ActivityLog::catat('Menerbitkan Artikel Blog', 'Judul: ' . $request->judul);
-        return redirect()->back()->with('success', 'Cerita sudah ditambahkan!');
+        ActivityLog::catat('Menerbitkan Artikel Blog', 'Judul: ' . $validated['judul']);
+
+        return redirect()
+            ->back()
+            ->with('success', 'Cerita sudah ditambahkan!');
     }
 
     public function update(Request $request, $id)
     {
         $blog = Blog::findOrFail($id);
 
-        $request->validate([
-            'judul' => 'required|max:255',
-            'kategori' => 'required',
-            'konten' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        $validated = $request->validate([
+            'judul' => ['required', 'string', 'max:255'],
+            'kategori' => ['required', 'string', 'max:100'],
+            'status' => ['required', 'in:draft,published'],
+            'konten' => ['required', 'string'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
-        $path = $blog->gambar; // Simpan path gambar lama terlebih dahulu
+        $validated['slug'] = Str::slug($validated['judul']);
+        $validated['gambar'] = $blog->gambar;
+
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada gambar baru yang diunggah
             if ($blog->gambar) {
                 Storage::disk('public')->delete($blog->gambar);
             }
-            $path = $request->file('gambar')->store('blog', 'public');
+
+            $validated['gambar'] = $request->file('gambar')->store('blog', 'public');
         }
 
-        $blog->update([
-            'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
-            'kategori' => $request->kategori,
-            'status' => $request->status,
-            'konten' => $request->konten,
-            'gambar' => $path,
-        ]);
+        $blog->update($validated);
 
-        ActivityLog::catat('Mengubah Artikel Blog', 'Judul: ' . $request->judul, 'update');
-        return redirect()->back()->with('success', 'Artikel berhasil diperbarui!');
+        ActivityLog::catat('Mengubah Artikel Blog', 'Judul: ' . $validated['judul'], 'update');
+
+        return redirect()
+            ->back()
+            ->with('success', 'Artikel berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
+
         if ($blog->gambar) {
             Storage::disk('public')->delete($blog->gambar);
         }
+
         $blog->delete();
 
         ActivityLog::catat('Menghapus Artikel Blog', 'ID: ' . $id, 'update');
-        return redirect()->back()->with('success', 'Artikel berhasil dihapus!');
+
+        return redirect()
+            ->back()
+            ->with('success', 'Artikel berhasil dihapus!');
     }
 }

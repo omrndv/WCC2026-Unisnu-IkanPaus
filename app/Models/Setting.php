@@ -9,7 +9,6 @@ class Setting extends Model
 {
     protected $fillable = ['key', 'value'];
 
-    // Ambil setting by key, dengan cache biar cepet
     public static function get(string $key, $default = null)
     {
         return Cache::rememberForever("setting_{$key}", function () use ($key, $default) {
@@ -18,7 +17,6 @@ class Setting extends Model
         });
     }
 
-    // Simpan setting + hapus cache lama
     public static function set(string $key, $value)
     {
         static::updateOrCreate(['key' => $key], ['value' => $value]);
