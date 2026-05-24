@@ -5,24 +5,24 @@
 
 @section('content')
 
-<section class="relative bg-primary pt-32 pb-20 overflow-hidden">
+<section class="relative bg-primary pt-32 pb-20 overflow-hidden text-center">
     <div class="absolute inset-0 opacity-100 mix-blend-overlay" style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png'); background-repeat: repeat;"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/90"></div>
     <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-highlight rounded-full blur-[180px] opacity-15 -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[150px] opacity-20 translate-y-1/3 -translate-x-1/4"></div>
 
     <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-3xl">
-            <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full text-highlight font-bold tracking-widest uppercase text-xs mb-6 border border-white/20 animate-fade-in">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center gap-3 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full text-highlight font-bold tracking-widest uppercase text-xs mb-6 border border-white/20 animate-fade-in">
                 <span class="w-2 h-2 rounded-full bg-highlight animate-pulse"></span> Etalase Digital
             </div>
-            
+
             <h1 class="text-5xl md:text-7xl font-title text-white mb-6 leading-[1.1] animate-slide-up">
                 Koleksi Rasa <br>
                 <span class="italic text-highlight">Nusantara</span>
             </h1>
-            
-            <p class="text-lg text-white/70 font-light max-w-xl leading-relaxed animate-slide-up delay-200">
+
+            <p class="text-lg text-white/70 font-light max-w-xl mx-auto leading-relaxed animate-slide-up delay-200">
                 Jelajahi puluhan varian getuk goreng autentik Banyumas. Dari resep klasik warisan 1940 hingga inovasi rasa modern.
             </p>
         </div>
@@ -32,7 +32,7 @@
 <section id="filter-bar" class="relative z-10 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm py-4 -mt-1 rounded-t-[2rem]">
     <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
-            
+
             <div class="relative w-full lg:w-96 group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -74,7 +74,7 @@
 <section class="py-12 bg-[#FAFAFA] min-h-screen">
     <div class="container mx-auto px-6">
 
-        <div class="mb-12 relative rounded-[2.5rem] bg-primary overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between p-8 md:p-12 border border-highlight/20 group">
+        <div id="promo-banner" class="mb-12 relative rounded-[2.5rem] bg-primary overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between p-8 md:p-12 border border-highlight/20 group transition-all duration-300">
             <div class="absolute inset-0 opacity-50 mix-blend-overlay" style="background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');"></div>
             <div class="absolute -right-20 -top-20 w-64 h-64 bg-highlight/30 rounded-full blur-3xl transition-transform duration-700 group-hover:scale-150"></div>
 
@@ -104,10 +104,10 @@
         <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             @forelse($produk as $p)
                 <div class="product-card group bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_50px_rgba(92,46,0,0.12)] transition-all duration-500 border border-gray-100 relative"
-                     data-id="{{ $p->id }}" 
-                     data-category="{{ $p->kategori ?? 'klasik' }}"
-                     data-price="{{ $p->harga }}" 
-                     data-popular="100" 
+                     data-id="{{ $p->id }}"
+                     data-category="{{ strtolower($p->kategori ?? 'klasik') }}"
+                     data-price="{{ $p->harga }}"
+                     data-popular="100"
                      data-name="{{ strtolower($p->nama) }}">
 
                     <div class="relative h-80 overflow-hidden img-container bg-gray-100">
@@ -161,7 +161,7 @@
                                 <span class="text-sm font-bold text-gray-600">5.0</span>
                             </div>
                         </div>
-                        
+
                         <p class="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed">{{ $p->deskripsi }}</p>
 
                         <div class="flex items-end justify-between border-t border-gray-100 pt-6">
@@ -201,13 +201,13 @@
                     cucu. Manisnya pas, singkongnya empuk, pengemasannya juga sangat rapi."
                 </p>
                 <div class="flex items-center justify-center gap-4">
-                    
+
                     <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center border-2 border-white shadow-sm shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 1 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                         </svg>
                     </div>
-                    
+
                     <div class="text-left">
                         <h5 class="font-bold text-primary">Ibu Sudjiati</h5>
                         <p class="text-xs text-gray-500 uppercase tracking-widest">Pelanggan Setia sejak 1997</p>
@@ -233,15 +233,15 @@
                 <div class="h-80 md:h-full relative overflow-hidden rounded-t-[2.5rem] md:rounded-l-[2.5rem] md:rounded-tr-none bg-gray-100">
                     <img id="modal-img" src="{{ asset('images/produk/getukgoreng.jpeg') }}" alt="" class="w-full h-full object-cover">
                 </div>
-                
+
                 <div class="p-10 md:p-12">
                     <div id="modal-badges" class="flex flex-wrap gap-2 mb-4"></div>
                     <h2 id="modal-title" class="text-3xl md:text-4xl font-title font-bold text-primary mb-1"></h2>
-                    
+
                     <div class="flex items-center gap-4 mb-4">
                         <div class="flex text-highlight" id="modal-rating"></div>
                     </div>
-                    
+
                     <p id="modal-desc" class="text-gray-600 leading-relaxed mb-8"></p>
 
                     <div class="space-y-4 mb-8">
@@ -286,7 +286,7 @@
 <div id="cart-overlay" onclick="closeCart()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300"></div>
 
 <div id="cart-modal" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-[#FAFAFA] shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 flex flex-col">
-    
+
     <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-white rounded-bl-3xl shadow-sm relative z-10">
         <h2 class="text-xl font-title font-bold text-primary flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-highlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -311,11 +311,11 @@
     </div>
 
     <div class="p-6 bg-white border-t border-gray-100 rounded-tl-3xl shadow-[0_-10px_30px_rgba(0,0,0,0.03)] relative z-10">
-        
+
         <div class="mb-5">
             <label class="block text-sm font-bold text-primary mb-3">Pilihan Kemasan (Wajib)</label>
             <div class="grid grid-cols-3 gap-3">
-                
+
                 <div class="relative">
                     <input type="radio" name="packaging" id="pack-besek" value="Besek (Klasik)" class="peer sr-only" checked onchange="updateCartUI()">
                     <label for="pack-besek" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
@@ -337,7 +337,7 @@
                 <div class="relative">
                     <input type="radio" name="packaging" id="pack-parcel" value="Parcel (Spesial)" class="peer sr-only" onchange="updateCartUI()">
                     <label for="pack-parcel" class="cursor-pointer rounded-xl border-2 border-gray-100 bg-white p-2 text-center transition-all hover:border-highlight/50 peer-checked:border-highlight peer-checked:bg-highlight/5 peer-checked:ring-1 peer-checked:ring-highlight block h-full">
-                        <img src="{{ asset('images/produk/kardus.jpeg ') }}" alt="Parcel" class="w-full h-16 object-cover rounded-lg mb-2">
+                        <img src="{{ asset('images/produk/kardus.jpeg') }}" alt="Parcel" class="w-full h-16 object-cover rounded-lg mb-2">
                         <div class="font-bold text-xs text-primary leading-tight">Kardus</div>
                         <div class="text-[10px] text-highlight font-medium mt-1">+Rp 7rb</div>
                     </label>
@@ -383,7 +383,7 @@
 
 @push('styles')
 <style>
-.shine-effect { transform: translateX(-100%); transition: transform 0.6s; }
+    .shine-effect { transform: translateX(-100%); transition: transform 0.6s; }
     .group:hover .shine-effect { transform: translateX(100%); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -392,38 +392,39 @@
 
     @keyframes fade-in {
         from { opacity: 0; transform: translateY(20px); }
-        to   { opacity: 1; transform: translateY(0); }
+        to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes slide-up {
         from { opacity: 0; transform: translateY(40px); }
-        to   { opacity: 1; transform: translateY(0); }
+        to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes pop-elastic {
-        0%   { transform: scale(1); }
-        40%  { transform: scale(1.3); }
-        70%  { transform: scale(0.9); }
+        0% { transform: scale(1); }
+        40% { transform: scale(1.3); }
+        70% { transform: scale(0.9); }
         100% { transform: scale(1); }
     }
+
     @keyframes badge-bounce {
-        0%   { transform: scale(1); }
-        40%  { transform: scale(1.5); }
-        70%  { transform: scale(0.85); }
+        0% { transform: scale(1); }
+        40% { transform: scale(1.5); }
+        70% { transform: scale(0.85); }
         100% { transform: scale(1); }
     }
+
     @keyframes cart-entrance {
         from { transform: scale(0); opacity: 0; }
-        to   { transform: scale(1); opacity: 1; }
+        to { transform: scale(1); opacity: 1; }
     }
 
-    .animate-fade-in  { animation: fade-in 0.8s ease-out forwards; }
+    .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
     .animate-slide-up { animation: slide-up 1s ease-out forwards; }
-    .delay-200        { animation-delay: 0.2s; }
-
-    .cart-pop  { animation: pop-elastic 0.4s ease-out forwards; }
+    .delay-200 { animation-delay: 0.2s; }
+    .cart-pop { animation: pop-elastic 0.4s ease-out forwards; }
     .badge-pop { animation: badge-bounce 0.3s ease-out forwards; }
-
     .wishlist-pop { animation: pop-elastic 0.35s ease-out forwards; }
-
     .cart-btn { animation: cart-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s both; }
 
     ::-webkit-scrollbar { width: 8px; }
@@ -438,23 +439,37 @@
 
 @push('scripts')
 <script>
-let cartArray = [];
+    let cartArray = [];
     let currentQuickViewId = null;
-    
+
     const productsData = {
         @foreach ($produk as $p)
             {{ $p->id }}: {
-                title: "{{ $p->nama }}",
+                title: @json($p->nama),
                 price: "Rp {{ number_format($p->harga, 0, ',', '.') }}",
                 rawPrice: {{ $p->harga }},
                 unit: "/ box",
-                desc: "{{ addslashes($p->deskripsi) }}",
+                desc: @json($p->deskripsi),
                 img: "{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/produk/getukgoreng.jpeg') }}",
                 badge: '<span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">{{ $p->status ?? 'Tersedia' }}</span>',
                 rating: 5
             },
         @endforeach
     };
+
+    function togglePromoBanner() {
+        const promoBanner = document.getElementById('promo-banner');
+        const activeFilter = document.querySelector('.filter-btn.bg-primary')?.dataset.filter || 'all';
+        const search = document.getElementById('search-input')?.value.toLowerCase().trim() || '';
+
+        if (!promoBanner) return;
+
+        if (search !== '' || activeFilter !== 'all') {
+            promoBanner.classList.add('hidden');
+        } else {
+            promoBanner.classList.remove('hidden');
+        }
+    }
 
     function openCart() {
         const modal = document.getElementById('cart-modal');
@@ -500,7 +515,7 @@ let cartArray = [];
         let totalItems = 0;
         cartArray.forEach(item => totalItems += item.qty);
         badge.textContent = totalItems;
-        
+
         if (totalItems > 0) {
             badge.classList.remove('scale-0');
             badge.classList.add('scale-100');
@@ -566,7 +581,7 @@ let cartArray = [];
             const prod = productsData[item.id];
             const subtotal = prod.rawPrice * item.qty;
             totalSubPrice += subtotal;
-            message += `▪️ ${item.qty}x ${prod.title} (Rp ${subtotal.toLocaleString('id-ID')})\n`;
+            message += `- ${item.qty}x ${prod.title} (Rp ${subtotal.toLocaleString('id-ID')})\n`;
         });
 
         let packFee = 0;
@@ -577,7 +592,7 @@ let cartArray = [];
 
         message += `\n *Jenis Kemasan:* ${packaging}\n`;
         if (packFee > 0) message += `*Biaya Tambahan Kemasan:* Rp ${packFee.toLocaleString('id-ID')}\n`;
-        message += `\n *Total Estimasi:* Rp ${grandTotal.toLocaleString('id-ID')}\n\nMohon info ketersediaan stoknya ya. Terima kasih! 🙏`;
+        message += `\n *Total Estimasi:* Rp ${grandTotal.toLocaleString('id-ID')}\n\nMohon info ketersediaan stoknya ya. Terima kasih!`;
 
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
     }
@@ -607,14 +622,16 @@ let cartArray = [];
 
     function filterProducts() {
         const activeFilter = document.querySelector('.filter-btn.bg-primary')?.dataset.filter || 'all';
-        const search = searchInput.value.toLowerCase();
+        const search = searchInput.value.toLowerCase().trim();
         const sortValue = sortSelect.value;
         let visibleCards = [];
+
+        togglePromoBanner();
 
         productCards.forEach(card => {
             const category = card.dataset.category;
             const name = card.dataset.name;
-            const desc = card.querySelector('p').textContent.toLowerCase();
+            const desc = card.querySelector('p.text-gray-500')?.textContent.toLowerCase() || '';
             const matchesCategory = activeFilter === 'all' || category === activeFilter;
             const matchesSearch = name.includes(search) || desc.includes(search);
 
